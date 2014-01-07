@@ -1,8 +1,8 @@
-set :stage, :staging
+set :stage, :development
 
 set :branch, "develop"
 
-set :mongodb_name, "meanr-dev"
+set :mongodb_name, "meanr"
 
 # Simple Role Syntax
 # ==================

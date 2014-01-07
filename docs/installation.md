@@ -147,8 +147,8 @@ Before we do that update two things in the Chef Ruby code:
 1. Check and update "your-email@address.com" in the `nodes/dev.meanr.com.json` file.
 This will be the email address the server sends email to from it's various systems processes.
 
-2. Copy your `~/.ssh/id_rsa.pub` PEM RSA private key into the `ssh_keys` property of the `deploy` user in chef/kitchen/data_bags/users/deploy.json
-This is for the deploy user account so you will have passwordless Dev Ops access.
+2. Copy your `~/.ssh/id_rsa.pub` PEM RSA private key into the `ssh_keys` property of the `deploy` user in `chef/kitchen/data_bags/users/deploy.json`
+This is for the `deploy` user account so you will have no password DevOps access.
 
     thor devops:cook
 
@@ -163,11 +163,11 @@ Before starting the MEANR app you can seed the database with a test user and som
 Run the bundle command to install Capistrano (Ruby)
 
     bundle
-    cap development mongodb_seed
+    cap local mongodb_seed
 
 There is also a database collection drop command
 
-    cap development mongodb_drop
+    cap local mongodb_drop
 
 Start the application with `grunt`
 

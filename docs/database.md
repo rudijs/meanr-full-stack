@@ -4,11 +4,11 @@ Run the bundle command to install Capistrano (Ruby)
 
     cd meanr-full-stack/
     bundle
-    cap development mongodb_seed
+    cap local mongodb_seed
 
 Mongodb database collection drop command
 
-    cap development mongodb_drop
+    cap local mongodb_drop
 
 The json seed fixtures files are in
 

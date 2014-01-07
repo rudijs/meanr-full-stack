@@ -1,17 +1,17 @@
-set :stage, :staging
+set :stage, :local
 
 set :branch, "develop"
 
-set :mongodb_name, "meanr"
+set :mongodb_name, "meanr-dev"
 
 # Simple Role Syntax
 # ==================
 # Supports bulk-adding hosts to roles, the primary
 # server in each group is considered to be the first
 # unless any hosts have the primary property set.
-role :app, %w{deploy@staging.meanr.com}
-role :web, %w{deploy@staging.meanr.com}
-role :db,  %w{deploy@staging.meanr.com}
+role :app, %w{deploy@dev.meanr.com}
+role :web, %w{deploy@dev.meanr.com}
+role :db,  %w{deploy@dev.meanr.com}
 
 # Extended Server Syntax
 # ======================

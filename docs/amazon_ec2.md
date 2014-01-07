@@ -59,7 +59,7 @@ The following will be all command line operations.
     * Update and Upgrade server:
     * `thor devops:upgrade`
     * Add (bootstrap) the server with Chef
-    * `thor devops:bootsrap`
+    * `thor devops:bootstrap`
     * Install all software
     * `thor devops:cook`
 

@@ -42,7 +42,7 @@ The sample application is a simple article CRUD app and comes with unit and end-
 
 ![MEANR Flow](https://dl.dropboxusercontent.com/u/7108604/meanr.png "MEANR Flow")
 
-### Requirements Overview - MEANR Full Stack is currently built with these versions:
+### Requirements Overview - MEANR Full Stack is currently built with:
 
 * [Node.js](http://nodejs.org/) (v0.10.24)
 * [Ruby](http://rvm.io/) (2.1.0p0)
