@@ -1,5 +1,12 @@
 ## Deployment
 
-cd meanr-full-stack/
+### Development
 
+cd meanr-full-stack/
 cap development deploy
+
+### Staging
+
+### QA
+
+### Production
