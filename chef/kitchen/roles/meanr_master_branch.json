@@ -1,0 +1,14 @@
+{
+    "name": "master_branch",
+    "default_attributes": {},
+    "override_attributes": {},
+    "json_class": "Chef::Role",
+    "description": "Recipes for the git master branch",
+    "chef_type": "role",
+    "run_list": [
+        "recipe[datadog::dd-handler]",
+        "recipe[ntp]",
+        "recipe[datadog::dd-agent]",
+        "recipe[mongodb::mms-agent]"
+    ]
+}

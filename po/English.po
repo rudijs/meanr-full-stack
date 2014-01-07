@@ -1,0 +1,111 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: Rudi <ooly.me@gmail.com>\n"
+"Language-Team: \n"
+"Language: English\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "About Us"
+msgstr ""
+
+msgid "Application with"
+msgstr ""
+
+msgid "Articles"
+msgstr ""
+
+msgid "Back"
+msgstr ""
+
+msgid "Content"
+msgstr ""
+
+msgid "Create"
+msgstr ""
+
+msgid "Create Article"
+msgstr ""
+
+msgid "Create Date"
+msgstr ""
+
+msgid "Create One"
+msgstr ""
+
+msgid "Create a new Article"
+msgstr ""
+
+msgid "Delete"
+msgstr ""
+
+msgid "Deployment"
+msgstr ""
+
+msgid "Edit"
+msgstr ""
+
+msgid "Edit Article"
+msgstr ""
+
+msgid "Email"
+msgstr ""
+
+msgid "English"
+msgstr ""
+
+msgid "Full Name"
+msgstr ""
+
+msgid "Language"
+msgstr ""
+
+msgid "MEANR Stack"
+msgstr ""
+
+msgid "Menu"
+msgstr ""
+
+msgid "Password"
+msgstr ""
+
+msgid "Sign In"
+msgstr ""
+
+msgid "Sign Out"
+msgstr ""
+
+msgid "Sign Up"
+msgstr ""
+
+msgid "Spanish"
+msgstr ""
+
+msgid "Storage"
+msgstr ""
+
+msgid "There are no articles yet."
+msgstr ""
+
+msgid "Title"
+msgstr ""
+
+msgid "Update"
+msgstr ""
+
+msgid "User"
+msgstr ""
+
+msgid "Username"
+msgstr ""
+
+msgid "Why don't you"
+msgstr ""
+
+msgid "for Deployment"
+msgstr ""

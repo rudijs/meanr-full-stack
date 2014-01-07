@@ -1,0 +1,26 @@
+{
+  "root": "/srv/meanr/current",
+
+  "app": {
+    "domain": "meanr.com",
+    "cookie_domain": ".meanr.com"
+  },
+
+  "database": {
+    "mongodb": {
+      "uri": "mongodb://127.0.0.1/meanr"
+    },
+    "redis": {
+      "ip": "127.0.0.1"
+    }
+  },
+
+  "loggly": {
+    "inputToken": "your-lggoy-token",
+    "subdomain": "your-domain.loggly.com",
+    "auth": {
+      "username": "your-loggly-username",
+      "password": "your-loggly-password"
+    }
+  }
+}

@@ -1,0 +1,11 @@
+{
+    "name": "develop_branch",
+    "default_attributes": {},
+    "override_attributes": {},
+    "json_class": "Chef::Role",
+    "description": "Recipes for the git develop branch",
+    "chef_type": "role",
+    "run_list": [
+        "recipe[ntp]"
+    ]
+}

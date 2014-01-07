@@ -1,0 +1,16 @@
+{
+  "name": "angular",
+  "version": "1.2.6-build.2007+sha.f0e3dfd",
+  "main": "./angular.js",
+  "dependencies": {},
+  "homepage": "https://github.com/angular/bower-angular",
+  "_release": "1.2.6-build.2007+sha.f0e3dfd",
+  "_resolution": {
+    "type": "version",
+    "tag": "v1.2.6-build.2007+sha.f0e3dfd",
+    "commit": "4686849a646385f504c0216642c4a6258ece6166"
+  },
+  "_source": "git://github.com/angular/bower-angular.git",
+  "_target": "1.2.6-build.2007+sha.f0e3dfd",
+  "_originalSource": "angular"
+}

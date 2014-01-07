@@ -1,0 +1,40 @@
+upstream app {
+  server 127.0.0.1:3000;
+}
+
+server {
+  listen 80 default_server;
+  server_name
+            dev.meanr.com
+            staging.meanr.com
+            qa.meanr.com
+            meanr.com;
+
+  if ($host = '192.168.33.10') {
+    rewrite ^ http://dev.meanr.com$request_uri last;
+  }
+
+  if ($host ~ ^[1-9]) {
+    rewrite ^ http://meanr.com$request_uri last;
+  }
+
+  access_log /var/log/nginx/meanr.log;
+
+  location / {
+  proxy_pass http://app;
+
+  proxy_set_header Host app;
+  proxy_set_header X-Real-IP $remote_addr;
+  proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+  }
+
+  location ~* \.(?:jpg|jpeg|gif|png|css|js|ico)$ {
+  root /srv/meanr/current/dist;
+  }
+}
+
+server {
+  listen       80;
+  server_name  www.meanr.com;
+  return       301 http://meanr.com$request_uri;
+}

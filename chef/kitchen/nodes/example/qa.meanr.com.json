@@ -1,0 +1,81 @@
+{
+
+    "set_fqdn": "qa.meanr.com",
+
+    "app": {
+        "hostname": "meanr.com",
+        "root": "/srv/meanr",
+        "owner": "deploy",
+        "group": "deploy"
+    },
+
+    "postfix": {
+        "myhostname": "qa.meanr.com",
+        "aliases": {
+            "root": "your-email@address.com"
+        }
+    },
+
+    "unattended_upgrades": {
+        "upgrade_email": "your-email@address.com"
+    },
+
+    "users": [
+        "deploy"
+    ],
+
+    "user": {
+        "ssh_keygen": "false"
+    },
+
+    "node_version": "0.10.24",
+
+    "nginx": {
+        "default_site_enabled": false,
+        "server_tokens": "off"
+    },
+
+    "sysctl": {
+        "params": {
+
+            /* http://dak1n1.com/blog/12-nginx-performance-tuning */
+
+            /* Increase system IP port limits to allow for more connections */
+            "net.ipv4.ip_local_port_range": "2000 65000",
+            "net.ipv4.tcp_window_scaling": 1,
+
+            /* number of packets to keep in backlog before the kernel starts dropping them */
+            "net.ipv4.tcp_max_syn_backlog": 3240000,
+
+            /* increase socket listen backlog */
+            "net.ipv4.tcp_max_tw_buckets": 1440000,
+
+            /* Increase TCP buffer sizes */
+            "net.core.rmem_default": 8388608,
+            "net.core.rmem_max": 16777216,
+            "net.core.wmem_max": 16777216,
+            "net.ipv4.tcp_rmem": "4096 87380 16777216",
+            "net.ipv4.tcp_wmem": "4096 65536 16777216",
+            "net.ipv4.tcp_congestion_control": "cubic"
+        }
+    },
+
+    "datadog": {
+        "api_key": "your-datadog-api_key",
+        "application_key": "your-datadob-application_key"
+    },
+
+    "mongodb": {
+        "mms_agent": {
+            "api_key": "your-mongodb-mms-agent-api-key",
+            "secret_key": "your-mongodb-mms-agent-secret-key"
+        }
+    },
+
+    "run_list": [
+        "role[base]",
+        "role[meanr]",
+        "role[meanr_master_branch]"
+    ]
+
+}

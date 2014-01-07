@@ -1,0 +1,38 @@
+{
+  "name": "meanr-full-stack",
+  "version": "0.0.1",
+  "authors": [
+    "Your Name <your@email-address.com>"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "foundation": "~5.0.2",
+    "lodash": "latest",
+    "bower-angular-placeholders": "~0.0.2",
+    "restangular": "~1.1.8",
+    "angular-cookies": "~1.2.4",
+    "angular-gettext": "~0.2.0",
+    "angular-mocks": "~1.2.4",
+    "angular-route": "~1.2.4",
+    "angular-sanitize": "~1.2.4",
+    "angular-scenario": "~1.2.4",
+    "es5-shim": "~2.1.0",
+    "json3": "~3.2.6"
+  },
+  "exportsOverride": {
+    "foundation": {
+      "js": "js/*"
+    },
+    "lodash": {
+      "dist": "lodash.min.js"
+    }
+  }
+}

@@ -1,0 +1,49 @@
+<div class="row">
+    <div class="small-8 columns">
+
+        <form
+                name="articleForm"
+                id="articleForm"
+                novalidate="novalidate"
+                data-ng-submit="create()"
+                late-validate-form
+                display-server-side-errors>
+
+            <fieldset>
+                <legend translate>Create Article</legend>
+
+                <label for="title" translate>Title</label>
+                <input
+                        type="text"
+                        name="title"
+                        id="title"
+                        ng-model="title"
+                        ng-minlength="5"
+                        ng-maxlength="50"
+                        ng-required="true"
+                        clear-server-side-validation/>
+                <small class="error" ng-show="showClientSideValidationErrors(articleForm.title, 'minlength')">* Please use at least 5 characters
+                </small>
+
+
+                <label for="content" translate>Content</label>
+                <textarea
+                        type="text"
+                        name="content"
+                        id="content"
+                        ng-model="content"
+                        ng-minlength="5"
+                        ng-required="true"
+                        clear-server-side-validation/>
+
+                <button type="submit" id="create" class="button round" ng-disabled="!canSave()" translate>Create</button>
+
+            </fieldset>
+        </form>
+
+    </div>
+
+    <div class="small-4 columns">
+    </div>
+
+</div>

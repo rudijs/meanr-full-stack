@@ -1,0 +1,59 @@
+<div class="row" data-ng-controller="MainCtrl">
+
+    <div class="small-12 columns">
+
+        <h1>MEANR Stack</h1>
+
+        <p>MongoDB, Express, AngularJS, NodeJS, Redis - Javascript <span translate="">Application with</span> Ruby <span translate="">for Deployment</span></p>
+
+        <table id="awesomeThings">
+
+            <thead>
+            <tr>
+                <th>AngularJS</th>
+                <th>NodeJS</th>
+                <th translate="">Storage</th>
+                <th translate="">Deployment</th>
+                <th>Dev Ops</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr>
+                <td>
+                    <ul ng-repeat="awesomeThing in awesomeThings.angularjs">
+                        <li ng-bind="awesomeThing"></li>
+                    </ul>
+                </td>
+
+                <td>
+                    <ul ng-repeat="awesomeThing in awesomeThings.nodejs">
+                        <li ng-bind="awesomeThing"></li>
+                    </ul>
+                </td>
+
+                <td>
+                    <ul ng-repeat="awesomeThing in awesomeThings.storage">
+                        <li ng-bind="awesomeThing"></li>
+                    </ul>
+                </td>
+
+                <td>
+                    <ul ng-repeat="awesomeThing in awesomeThings.deployment">
+                        <li ng-bind="awesomeThing"></li>
+                    </ul>
+                </td>
+
+                <td>
+                    <ul ng-repeat="awesomeThing in awesomeThings.devops">
+                        <li ng-bind="awesomeThing"></li>
+                    </ul>
+                </td>
+            </tr>
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>

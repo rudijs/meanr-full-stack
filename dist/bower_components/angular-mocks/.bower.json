@@ -1,0 +1,18 @@
+{
+  "name": "angular-mocks",
+  "version": "1.2.6-build.2007+sha.f0e3dfd",
+  "main": "./angular-mocks.js",
+  "dependencies": {
+    "angular": "1.2.6-build.2007+sha.f0e3dfd"
+  },
+  "homepage": "https://github.com/angular/bower-angular-mocks",
+  "_release": "1.2.6-build.2007+sha.f0e3dfd",
+  "_resolution": {
+    "type": "version",
+    "tag": "v1.2.6-build.2007+sha.f0e3dfd",
+    "commit": "0d2c88023bcaacf5068782ddb1b5b7cc862813d1"
+  },
+  "_source": "git://github.com/angular/bower-angular-mocks.git",
+  "_target": "~1.2.4",
+  "_originalSource": "angular-mocks"
+}

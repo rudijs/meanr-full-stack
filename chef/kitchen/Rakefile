@@ -1,0 +1,63 @@
+require 'rake'
+require 'rspec/core/rake_task'
+
+hosts = [
+    {
+        :name => 'dev.meanr.com',
+        :roles => %w( base meanr develop_branch ),
+        :user => 'vagrant',
+    },
+    {
+        :name  => 'staging.meanr.com',
+        :roles => %w( base meanr develop_branch ),
+        :user => 'ubuntu'
+    },
+    {
+        :name  => 'qa.meanr.com',
+        :roles => %w( base meanr master_branch ),
+        :user => 'ubuntu'
+    },
+    {
+        :name  => 'meanr.com',
+        :roles => %w( base meanr master_branch ),
+        :user => 'ubuntu'
+    }
+]
+
+hosts = hosts.map do |host|
+  {
+      :name => host[:name],
+      :short_name => host[:name].split('.')[0],
+      :roles => host[:roles],
+      :user => host[:user]
+  }
+end
+
+desc "Run serverspec to all hosts"
+task :spec => 'serverspec:all'
+
+class ServerspecTask < RSpec::Core::RakeTask
+
+  attr_accessor :target, :user
+
+  def spec_command
+    cmd = super
+    "env TARGET_HOST=#{target} TARGET_USER=#{user} #{cmd}"
+  end
+
+end
+
+namespace :serverspec do
+
+  task :all => hosts.map { |h| 'serverspec:' + h[:short_name] }
+
+  hosts.each do |host|
+    desc "Run serverspec to #{host[:name]}"
+    ServerspecTask.new(host[:short_name].to_sym) do |t|
+      t.target = host[:name]
+      t.user = host[:user]
+      t.pattern = 'spec/{' + host[:roles].join(',') + '}/*_spec.rb'
+    end
+  end
+
+end

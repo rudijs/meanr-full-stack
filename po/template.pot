@@ -1,0 +1,145 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: app/views/header.html
+msgid "About Us"
+msgstr ""
+
+#: app/views/main.html
+msgid "Application with"
+msgstr ""
+
+#: app/views/header.html
+msgid "Articles"
+msgstr ""
+
+#: app/views/articles/show.html
+msgid "Back"
+msgstr ""
+
+#: app/views/articles/show.html
+#: www/views/articles/create.html
+#: www/views/articles/edit.html
+msgid "Content"
+msgstr ""
+
+#: www/views/articles/create.html
+msgid "Create"
+msgstr ""
+
+#: www/views/articles/create.html
+msgid "Create Article"
+msgstr ""
+
+#: app/views/articles/list.html
+msgid "Create Date"
+msgstr ""
+
+#: app/views/articles/list.html
+msgid "Create One"
+msgstr ""
+
+#: app/views/header.html
+msgid "Create a new Article"
+msgstr ""
+
+#: www/views/articles/edit.html
+msgid "Delete"
+msgstr ""
+
+#: app/views/main.html
+msgid "Deployment"
+msgstr ""
+
+#: app/views/articles/show.html
+msgid "Edit"
+msgstr ""
+
+#: www/views/articles/edit.html
+msgid "Edit Article"
+msgstr ""
+
+#: app/views/users/signin.html
+#: app/views/users/signup.html
+msgid "Email"
+msgstr ""
+
+#: app/views/header.html
+msgid "English"
+msgstr ""
+
+#: app/views/users/signup.html
+msgid "Full Name"
+msgstr ""
+
+#: app/views/header.html
+msgid "Language"
+msgstr ""
+
+#: app/views/header.html
+msgid "MEANR Stack"
+msgstr ""
+
+#: app/views/header.html
+msgid "Menu"
+msgstr ""
+
+#: app/views/users/signin.html
+#: app/views/users/signup.html
+msgid "Password"
+msgstr ""
+
+#: app/views/header.html
+#: app/views/users/signin.html
+msgid "Sign In"
+msgstr ""
+
+#: app/views/header.html
+msgid "Sign Out"
+msgstr ""
+
+#: app/views/header.html
+#: app/views/users/signup.html
+msgid "Sign Up"
+msgstr ""
+
+#: app/views/header.html
+msgid "Spanish"
+msgstr ""
+
+#: app/views/main.html
+msgid "Storage"
+msgstr ""
+
+#: app/views/articles/list.html
+msgid "There are no articles yet."
+msgstr ""
+
+#: app/views/articles/list.html
+#: app/views/articles/show.html
+#: www/views/articles/create.html
+#: www/views/articles/edit.html
+msgid "Title"
+msgstr ""
+
+#: www/views/articles/edit.html
+msgid "Update"
+msgstr ""
+
+#: app/views/header.html
+msgid "User"
+msgstr ""
+
+#: app/views/users/signup.html
+msgid "Username"
+msgstr ""
+
+#: app/views/articles/list.html
+msgid "Why don't you"
+msgstr ""
+
+#: app/views/main.html
+msgid "for Deployment"
+msgstr ""

@@ -1,0 +1,37 @@
+<div class="row">
+    <div class="small-8 columns">
+
+        <p></p>
+        <table id="articles">
+
+            <thead>
+                <tr>
+                    <th translate>Title</th>
+                    <th translate>Create Date</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+            <tr data-ng-hide="!articles || articles.length">
+                <td colspan="2">
+                    <p translate>There are no articles yet.</p>
+
+                    <p ng-show="global.isSignedIn()"><span translate>Why don't you</span> <a href="/#/articles/create" translate>Create One</a>?</p>
+                </td>
+            </tr>
+
+            <tr ng-repeat="article in articles" ng-click="go.to('/articles', article._id, 'back')">
+                <td>{{ article.title }}</td>
+                <td nowrap="nowrap"> {{ article.created_at | date:'fullDate' }}</td>
+            </tr>
+
+            </tbody>
+
+        </table>
+    </div>
+
+    <div class="small-4 columns">
+    </div>
+
+</div>

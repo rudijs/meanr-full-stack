@@ -1,0 +1,27 @@
+{
+  "app": {
+    "domain": "meanr.local",
+    "cookie_domain": ".meanr.local"
+  },
+
+  "database": {
+    "mongodb": {
+      "uri": "mongodb://localhost/meanr-test"
+    },
+    "redis": {
+      "ip": "localhost"
+    }
+  },
+
+  "testCredentials": {
+    "name": "Net Citizen",
+    "email": "net@citizen.com",
+    "username": "netcitizen",
+    "password": "asdf"
+  },
+
+  "apiTest": {
+    "email": "net@citizen.com",
+    "password": "asdf"
+  }
+}

@@ -1,0 +1,17 @@
+{
+    "name": "system",
+    "default_attributes": {},
+    "override_attributes": {},
+    "json_class": "Chef::Role",
+    "description": "Base OS default configurations",
+    "chef_type": "role",
+    "run_list": [
+        "recipe[hostname]",
+        "recipe[apt-get-periodic]",
+        "recipe[postfix]",
+        "recipe[postfix::aliases]",
+        "recipe[unattended_upgrades]",
+        "recipe[packages]",
+        "recipe[user::data_bag]"
+    ]
+}

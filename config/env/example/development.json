@@ -1,0 +1,20 @@
+{
+  "app": {
+    "domain": "meanr.local",
+    "cookie_domain": ".meanr.local"
+  },
+
+  "database": {
+    "mongodb": {
+      "uri": "mongodb://192.168.33.10/meanr-dev"
+    },
+    "redis": {
+      "ip": "192.168.33.10"
+    }
+  },
+
+  "apiTest": {
+    "email": "net@citizen.com",
+    "password": "asdf"
+  }
+}

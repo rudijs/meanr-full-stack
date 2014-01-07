@@ -1,0 +1,17 @@
+{
+  "database": {
+    "mongodb": {
+      "uri": "mongodb://192.168.33.10/meanr-test"
+    },
+    "redis": {
+      "ip": "192.168.33.10"
+    }
+  },
+
+  "testCredentials": {
+    "name": "Net Citizen",
+    "email": "net@citizen.com",
+    "username": "netcitizen",
+    "password": "asdf"
+  }
+}

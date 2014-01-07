@@ -1,0 +1,35 @@
+<div class="row" data-ng-controller="UsersCtrl">
+    <div class="small-4 columns">
+
+        <form action="/users" method="post">
+            <fieldset>
+                <legend translate>Sign Up</legend>
+
+                <span translate>Full Name</span>:
+
+                <input type="text" name="name" focus/>
+                <br/>
+
+                <span translate>Email</span>:
+                <input type="text" name="email"/>
+                <br/>
+
+                <span translate>Username</span>:
+                <input type="text" name="username"/>
+                <br/>
+
+                <span translate>Password</span>:
+                <input type="password" name="password"/>
+                <br/>
+
+                <button type="submit" class="button round" translate>Sign Up</button>
+
+            </fieldset>
+            <input type="hidden" name="_csrf" value="{{csrfToken}}" />
+        </form>
+    </div>
+    <div class="small-8 columns">
+        <p></p>
+        <div data-ng-include="'views/users/social_login.html'"></div>
+    </div>
+</div>
