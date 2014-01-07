@@ -1,0 +1,66 @@
+<nav class="top-bar" data-topbar="" ng-controller="HeaderCtrl">
+    <ul class="title-area">
+        <li class="name">
+            <h1><a href="/" translate="">MEANR Stack</a></h1>
+        </li>
+
+        <li class="toggle-topbar menu-icon"><a><span translate="">Menu</span></a></li>
+    </ul>
+
+    <section class="top-bar-section">
+        <ul class="right">
+
+            <li class="divider" ng-hide="global.isSignedIn()"></li>
+            <li ng-hide="global.isSignedIn()">
+                <a href="#/signin"><i class="step fi-social-facebook size-36"></i>&nbsp;<span translate="">Sign In</span></a>
+            </li>
+
+            <li class="divider" ng-hide="global.isSignedIn()"></li>
+            <li ng-hide="global.isSignedIn()">
+                <a href="#/signup"><span translate="">Sign Up</span></a>
+            </li>
+
+            <li class="divider" ng-show="global.isSignedIn()"></li>
+            <li ng-show="global.isSignedIn()">
+                <a href="/signout" target="_self"><span translate="">Sign Out</span></a>
+            </li>
+
+            <li class="divider" ng-show="global.isSignedIn()"></li>
+            <li ng-show="global.isSignedIn()">
+                <a><span translate="">User</span>: {{global.currentUser().name}}</a>
+            </li>
+
+            <li class="divider"></li>
+
+            <li class="has-dropdown not-click show-for-large-up">
+                <a href="#/language"><span translate="">Language</span></a>
+                <ul class="dropdown">
+                    <li class=""><a ng-click="changeLanguage('English')"><span translate="">English</span></a></li>
+                    <li class=""><a ng-click="changeLanguage('Spanish')"><span translate="">Spanish</span></a></li>
+                </ul>
+            </li>
+
+            <li class="show-for-medium-down">
+                <a href="#/language"><span translate="">Language</span></a>
+            </li>
+
+        </ul>
+
+        <ul class="left">
+
+            <li class="divider"></li>
+            <li><a href="#/articles"><i class="step fi-asterisk size-36"></i>&nbsp;<span translate="">Articles</span></a></li>
+
+            <li class="divider" ng-show="global.isSignedIn()"></li>
+            <li ng-show="global.isSignedIn()"><a href="#/articles/create">
+                <i class="step fi-burst-new size-36"></i>&nbsp;<span translate="">Create a new Article</span></a>
+            </li>
+
+            <li class="divider"></li>
+            <li><a href="#/about"><i class="step fi-at-sign size-36"></i>&nbsp;<span translate="">About Us</span></a></li>
+
+        </ul>
+
+    </section>
+
+</nav>

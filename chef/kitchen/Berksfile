@@ -1,0 +1,13 @@
+site :opscode
+
+cookbook "hostname"
+cookbook "hostsfile"
+cookbook "postfix"
+cookbook "unattended_upgrades"
+cookbook "user"
+cookbook "sysctl"
+cookbook "ntp"
+cookbook "nginx"
+cookbook "redisio"
+cookbook "mongodb"
+cookbook "datadog"

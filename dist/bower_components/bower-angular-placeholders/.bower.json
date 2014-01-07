@@ -1,0 +1,18 @@
+{
+  "name": "angular-placeholders",
+  "version": "0.0.2",
+  "main": [
+    "./angular-placeholders.js"
+  ],
+  "dependencies": {},
+  "homepage": "https://github.com/grailian/bower-angular-placeholders",
+  "_release": "0.0.2",
+  "_resolution": {
+    "type": "version",
+    "tag": "0.0.2",
+    "commit": "0b804db31991080935c4ef12cd1c8a3c8d7ef81a"
+  },
+  "_source": "git://github.com/grailian/bower-angular-placeholders.git",
+  "_target": "~0.0.2",
+  "_originalSource": "bower-angular-placeholders"
+}

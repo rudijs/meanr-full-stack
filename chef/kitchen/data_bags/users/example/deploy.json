@@ -1,0 +1,9 @@
+{
+    "id":"deploy",
+    "comment":"deploy",
+    "home":"/home/deploy",
+    "shell": "/bin/bash",
+    "create_group": true,
+    "manage_home": true,
+    "ssh_keys":["your-ssh-public-key"]
+}

@@ -1,0 +1,24 @@
+{
+    "name": "meanr",
+    "default_attributes": {},
+    "override_attributes": {},
+    "json_class": "Chef::Role",
+    "description": "MEANR application",
+    "chef_type": "role",
+    "run_list": [
+        "recipe[ssh_known_hosts]",
+        "recipe[redisio::install]",
+        "recipe[redisio::enable]",
+        "recipe[mongodb::10gen_repo]",
+        "recipe[mongodb::default]",
+        "recipe[node_env]",
+        "recipe[nginx_apt]",
+        "recipe[nginx]",
+        "recipe[nginx_configure]",
+        "recipe[node_app_root]",
+        "recipe[node_upstart]",
+        "recipe[node]",
+        "recipe[sudoer_deploy]",
+        "recipe[sysctl]"
+    ]
+}

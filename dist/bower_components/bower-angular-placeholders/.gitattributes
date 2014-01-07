@@ -1,0 +1,16 @@
+* text=auto
+
+# Explicitly declare text files we want to always be normalized and converted
+# to native line endings on checkout.
+*.less text
+*.css text
+*.json text
+*.js text
+*.coffee text
+*.html text
+*.txt text
+*.us text
+*.ps1 text
+*.md text
+*.xml text
+*.log text

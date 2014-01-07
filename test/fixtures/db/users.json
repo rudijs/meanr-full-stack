@@ -1,0 +1,1 @@
+{ "_id" : { "$oid" : "52cb50966842230b79d7f7ca" }, "provider" : "local", "name" : "Net Citizen", "email" : "net@citizen.com", "username" : "netcitizen", "hashed_password" : "c2NyeXB0AAwAAAAIAAAAATdpgaND/MHd1buzCubnrxg8zpanrg6X5mPP6d4w8hrnCJqZ6p5WAhCuLBREFcsqMAUvQ70kvRH1iO7krZpP+klCs+3nCIvXXGCCxbRihNCs" }

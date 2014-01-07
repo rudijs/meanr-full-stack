@@ -1,0 +1,111 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: Rudi <ooly.me@gmail.com>\n"
+"Language-Team: \n"
+"Language: Spanish\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "About Us"
+msgstr "Sobre Nosotros"
+
+msgid "Application with"
+msgstr "Aplicación con"
+
+msgid "Articles"
+msgstr "Artículos"
+
+msgid "Back"
+msgstr "De vuelta"
+
+msgid "Content"
+msgstr "Contenido"
+
+msgid "Create"
+msgstr "Crear"
+
+msgid "Create Article"
+msgstr "Crear Artículo"
+
+msgid "Create Date"
+msgstr "Fecha de Creación"
+
+msgid "Create One"
+msgstr "Crear una"
+
+msgid "Create a new Article"
+msgstr "Crear un Nuevo Artículo"
+
+msgid "Delete"
+msgstr "Borrar"
+
+msgid "Deployment"
+msgstr "Despliegue"
+
+msgid "Edit"
+msgstr "Editar"
+
+msgid "Edit Article"
+msgstr "Modificar el Artículo"
+
+msgid "Email"
+msgstr ""
+
+msgid "English"
+msgstr "Inglés"
+
+msgid "Full Name"
+msgstr "Nombre Completo"
+
+msgid "Language"
+msgstr "Idioma"
+
+msgid "MEANR Stack"
+msgstr ""
+
+msgid "Menu"
+msgstr "Menú"
+
+msgid "Password"
+msgstr "Contraseña"
+
+msgid "Sign In"
+msgstr "Registrarse"
+
+msgid "Sign Out"
+msgstr "Salir"
+
+msgid "Sign Up"
+msgstr "Regístrese"
+
+msgid "Spanish"
+msgstr "Español"
+
+msgid "Storage"
+msgstr "Almacenamiento"
+
+msgid "There are no articles yet."
+msgstr "No hay artículos todavía."
+
+msgid "Title"
+msgstr "Título"
+
+msgid "Update"
+msgstr "Actualización"
+
+msgid "User"
+msgstr "Usuario"
+
+msgid "Username"
+msgstr "Nombre de usuario"
+
+msgid "Why don't you"
+msgstr "Por qué no"
+
+msgid "for Deployment"
+msgstr "para la implementación"

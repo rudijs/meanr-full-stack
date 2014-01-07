@@ -1,0 +1,44 @@
+/*.ng-pristine { border: solid black 1px; }
+
+.ng-dirty { border: solid black 3px; }
+
+.ng-valid.ng-dirty { border: solid green 3px; }
+
+.ng-invalid.ng-dirty { border: solid red 3px; }
+
+input.ng-invalid {
+    border: 1px solid red;
+}
+input.ng-valid {
+    border: 1px solid green;
+}
+
+input.has-visited:not(:focus):required:invalid,
+textarea.has-visited:not(:focus):required:invalid,
+select.has-visited:not(:focus):required:invalid {
+    color: #b94a48;
+    border-color: #ee5f5b;
+}
+*/
+.error { color: red; }
+
+table#articles tbody tr:hover {
+    background-color: #0ae9f1;
+    cursor: pointer;
+}
+
+table tbody > tr > td {
+    vertical-align: top;
+}
+
+table#awesomeThings th {
+    text-align: center;
+}
+
+table#awesomeThings li:hover {
+    background-color: #0ae9f1;
+ }
+
+form#articleForm textarea {
+    height: 300px;
+}

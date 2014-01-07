@@ -1,0 +1,26 @@
+language: node_js
+node_js:
+  - '0.10'
+env:
+  - NODE_ENV=travis
+services:
+  - mongodb
+  - redis
+addons:
+  hosts:
+    - meanr.local
+before_script:
+  - npm install -g grunt-cli bower
+  - grunt init
+  - bower install
+  - mongoimport --db meanr-test --collection users < test/fixtures/db/users.json
+  - node app.js &
+after_script:
+  - pkill node
+after_failure:
+  - ls -1 log
+  - cat log/*
+script:
+  - grunt karma:continuous
+  - npm test
+  - grunt test-travis

@@ -1,0 +1,40 @@
+<div class="row">
+    <div class="small-8 columns" data-ng-show="global.currentUser()._id == article.user._id">
+
+        <form
+                name="articleForm"
+                id="articleForm"
+                novalidate="novalidate"
+                data-ng-submit="update()"
+                late-validate-form
+                display-server-side-errors>
+
+            <fieldset>
+                <legend translate>Edit Article</legend>
+
+                <label for="title" translate>Title</label>
+                <input
+                        type="text"
+                        name="title"
+                        id="title"
+                        ng-model="article.title" clear-server-side-validation/>
+
+                <label for="content" translate>Content</label>
+                <textarea
+                        name="content"
+                        id="content"
+                        ng-model="article.content" clear-server-side-validation/>
+
+                <button type="submit" id="update" class="button round" ng-disabled="!canUpdate()" translate>Update</button>
+
+                <button type="button" id="delete" class="button tiny" ng-click="remove(article)" translate>Delete</button>
+
+            </fieldset>
+        </form>
+
+    </div>
+
+    <div class="small-4 columns">
+    </div>
+
+</div>

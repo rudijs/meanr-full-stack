@@ -1,0 +1,67 @@
+{
+  "sources": {
+    "hostname": {
+      "locked_version": "0.1.0"
+    },
+    "hostsfile": {
+      "locked_version": "2.4.2"
+    },
+    "postfix": {
+      "locked_version": "3.0.4"
+    },
+    "unattended_upgrades": {
+      "locked_version": "0.0.2"
+    },
+    "user": {
+      "locked_version": "0.3.0"
+    },
+    "sysctl": {
+      "locked_version": "0.3.5"
+    },
+    "ntp": {
+      "locked_version": "1.5.0"
+    },
+    "nginx": {
+      "locked_version": "2.0.8"
+    },
+    "redisio": {
+      "locked_version": "1.7.0"
+    },
+    "mongodb": {
+      "locked_version": "0.13.7"
+    },
+    "datadog": {
+      "locked_version": "1.1.1"
+    },
+    "apt": {
+      "locked_version": "2.3.0"
+    },
+    "bluepill": {
+      "locked_version": "2.3.0"
+    },
+    "rsyslog": {
+      "locked_version": "1.9.0"
+    },
+    "build-essential": {
+      "locked_version": "1.4.2"
+    },
+    "ohai": {
+      "locked_version": "1.1.12"
+    },
+    "runit": {
+      "locked_version": "1.4.6"
+    },
+    "yum": {
+      "locked_version": "2.4.4"
+    },
+    "ulimit": {
+      "locked_version": "0.3.2"
+    },
+    "python": {
+      "locked_version": "1.4.4"
+    },
+    "chef_handler": {
+      "locked_version": "1.1.4"
+    }
+  }
+}

@@ -1,0 +1,35 @@
+<div class="row" data-ng-controller="UsersCtrl" data-ng-init="showLoginErrorMessage()">
+
+    <div class="small-4 columns">
+
+        <br>
+        <div data-alert="" class="alert-box alert round" ng-bind="message" ng-show="message.length">
+        </div>
+
+        <form action="/users/session" method="post" name="signinForm" novalidate="novalidate" late-validate-form="">
+            <fieldset>
+                <legend translate="">Sign In</legend>
+
+                <span translate="">Email</span>:
+                <input type="email" name="email" id="email" maxlength="50" ng-model="email" ng-required="true" focus="">
+                <small class="error" ng-show="showClientSideValidationErrors(signinForm.email, 'required')">* Email is required</small>
+                <small class="error" ng-show="showClientSideValidationErrors(signinForm.email, 'email')">* Valid email address is required</small>
+
+                <span translate="">Password</span>:
+                <input type="password" name="password" id="password" maxlength="12" ng-model="password" ng-required="true" ng-minlength="4" ng-maxlength="12">
+                <small class="error" ng-show="showClientSideValidationErrors(signinForm.password, 'required')">* A password is required</small>
+                <small class="error" ng-show="showClientSideValidationErrors(signinForm.password, 'minlength')">* Please use at least 4 characters</small>
+                <small class="error" ng-show="showClientSideValidationErrors(signinForm.password, 'maxlength')">* Please use at most 12 characters</small>
+
+                <button type="submit" class="button round" ng-disabled="!canSave()" translate="">Sign In</button>
+
+            </fieldset>
+            <input type="hidden" name="_csrf" value="{{csrfToken}}">
+        </form>
+    </div>
+
+    <div class="small-8 columns">
+        <p></p>
+        <div data-ng-include="'views/users/social_login.html'"></div>
+    </div>
+</div>
