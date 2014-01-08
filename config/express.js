@@ -101,6 +101,10 @@ module.exports = function (app, passport) {
   // Assume "not found" in the error msgs is a 404. this is somewhat silly, but valid, you can do whatever you like, set properties, use instanceof etc.
   app.use(function (err, req, res, next) {
 
+    if (!err) {
+      return next();
+    }
+
     //Treat as 404
     if (~err.message.indexOf('not found')) {
       return next();
@@ -112,24 +116,22 @@ module.exports = function (app, passport) {
     }
     else {
       // All else defaults to HTML error page
+
+      logger.info(err.toString());
+
       var user = userUtil.user(req);
 
       // System error message to display
       var errorMsg;
 
-      if ('development' === app.get('env')) {
-        errorMsg = err.stack;
+      if ('production' === app.get('env')) {
+        errorMsg = 'We\'re sorry, but something went wrong. We\'ve been notified about this issue and we\'ll follow up on this right away.';
       }
       else {
-        errorMsg = 'We\'re sorry, but something went wrong. We\'ve been notified about this issue and we\'ll take a look at it shortly.';
+        errorMsg = err.stack;
       }
 
-      res.status(500).render('500.html', {
-        title: config.get('app').name,
-        hostname: req.host,
-        user: JSON.stringify(user),
-        error: errorMsg
-      });
+      res.status(500).render('500.html', { error: errorMsg });
     }
 
   });
@@ -138,7 +140,13 @@ module.exports = function (app, passport) {
   app.use(function (req, res) {
 
     // AngularJS handle 404 page
-    res.redirect('/#/' + req.originalUrl);
+
+    // 404 response
+    //res.redirect('/#' + req.originalUrl);
+
+    // 301 response (better for SEO?)
+    res.writeHead(301, {'Location': '/#' + req.originalUrl});
+    res.end();
   });
 
 };

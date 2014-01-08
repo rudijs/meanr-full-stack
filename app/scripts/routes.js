@@ -53,7 +53,7 @@ angular.module('meanr')
       }).
 
       otherwise({
-        redirectTo: '/'
+        redirectTo: '/404'
       });
 
   }]);

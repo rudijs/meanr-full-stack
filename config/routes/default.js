@@ -10,11 +10,9 @@ module.exports = function (app, config, passport, auth) {
   var index = require(config.get('root') + '/www/controllers/default');
   app.get('/', index.render);
 
-  // testing
-  /*
-   app.get('/error', function(req, res, next) {
-   // here we cause an error in the pipeline so we see express-winston in action.
-   return next(new Error("This is an error and it should be logged"));
-   });
-   */
+  // 500 error page
+  app.get('/500', function (req, res, next) {
+    return next(new Error('500 error response page sent from routes default /error'));
+  });
+
 };
