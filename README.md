@@ -24,6 +24,10 @@ Version control with Git Flow.
 
 ## Purpose
 
+Demonstration and starting point of how to develop **and** deloy a MEANR application.
+
+Emphasis on a professional level of development with a broad suite of tests.
+
 To help spread the word and improve on the "MEANR Stack with Dev Ops" goodness.
 
 To learn about and improve on the MEANR Stack.
@@ -40,7 +44,11 @@ A composition such as this project has many moving parts, this README is a high 
 
 The sample application is a simple article CRUD app and comes with unit and end-to-end tests for the client and server code.
 
-![MEANR Flow](https://dl.dropboxusercontent.com/u/7108604/meanr.png "MEANR Flow")
+## Workflow
+![MEANR Flow](https://dl.dropboxusercontent.com/u/7108604/meanr-full-stack-workflow_inkscape.png "MEANR Flow")
+
+## MEANR Stack Types
+![MEANR Stack Types](https://dl.dropboxusercontent.com/u/7108604/meanr-full-stack-types_inkscape.png "MEANR Stack Types")
 
 ### Requirements Overview - MEANR Full Stack is currently built with:
 
