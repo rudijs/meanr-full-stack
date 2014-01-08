@@ -1,11 +1,15 @@
 var env = process.env.NODE_ENV = process.env.NODE_ENV || 'development',
   config = require('./config'),
-  logger = require('winston'),
+// Custom winston logger
+  logger = require('./log'),
   express = require('express'),
   params = require('express-params'),
   redisClient = require('./redis'),
   redisStore = require('connect-redis')(express),
   flash = require('connect-flash'),
+// Express HTTP access and error logging
+// Default winston logger for express-winston to use
+  winston = require('winston'),
   expressWinston = require('express-winston'),
   userUtil = require('../www/utils/user');
 
@@ -77,7 +81,7 @@ module.exports = function (app, passport) {
   // express-winston logger makes sense BEFORE the router.
   app.use(expressWinston.logger({
     transports: [
-      new (logger.transports.File)({
+      new (winston.transports.File)({
         filename: config.get('root') + '/log/' + env + '_access.log',
         maxsize: config.get('logMaxFileSize'),
         maxfiles: config.get('logMaxFiles')
@@ -89,7 +93,7 @@ module.exports = function (app, passport) {
   // express-winston errorLogger makes sense AFTER the router.
   app.use(expressWinston.errorLogger({
     transports: [
-      new (logger.transports.File)({
+      new (winston.transports.File)({
         filename: config.get('root') + '/log/' + env + '_error.log',
         maxsize: config.get('logMaxFileSize'),
         maxfiles: config.get('logMaxFiles')
@@ -97,39 +101,37 @@ module.exports = function (app, passport) {
     ]
   }));
 
-  // Error Response Pages
-  // Assume "not found" in the error msgs is a 404. this is somewhat silly, but valid, you can do whatever you like, set properties, use instanceof etc.
+  // Server error handling
   app.use(function (err, req, res, next) {
 
-    //Treat as 404
-    if (~err.message.indexOf('not found')) {
-      return next();
-    }
+    logger.error(err.stack);
 
-    // If 403 send JSON reponse
+    // If 403 error send JSON response
     if (err.status === +403) {
+
+      logger.error('403: ' + req.originalUrl);
       res.jsonp(403, {error: 'Forbidden'});
     }
     else {
-      // All else defaults to HTML error page
+
+      // 500 error repsonse
+
+      logger.error('500: ' + req.originalUrl);
+
       var user = userUtil.user(req);
 
-      // System error message to display
+      // Error message to display
       var errorMsg;
 
-      if ('development' === app.get('env')) {
-        errorMsg = err.stack;
+      if ('production' === app.get('env')) {
+        errorMsg = 'We\'re sorry, but something went wrong. We\'ve been notified about this issue and we\'ll follow up on this right away.';
       }
       else {
-        errorMsg = 'We\'re sorry, but something went wrong. We\'ve been notified about this issue and we\'ll take a look at it shortly.';
+        errorMsg = err.stack;
       }
 
-      res.status(500).render('500.html', {
-        title: config.get('app').name,
-        hostname: req.host,
-        user: JSON.stringify(user),
-        error: errorMsg
-      });
+      res.status(500).render('500.html', { error: errorMsg });
+      return;
     }
 
   });
@@ -137,8 +139,17 @@ module.exports = function (app, passport) {
   // Assume 404 since no middleware responded
   app.use(function (req, res) {
 
-    // AngularJS handle 404 page
-    res.redirect('/#/' + req.originalUrl);
+    logger.error('404: ' + req.originalUrl);
+
+    // AngularJS handle 404 page or 301 permanent redirect (better for SEO?)
+
+    // 404 response
+    // res.redirect('/#' + req.originalUrl);
+
+    // 301 response
+    res.writeHead(301, {'Location': '/#' + req.originalUrl});
+    res.end();
+
   });
 
 };
