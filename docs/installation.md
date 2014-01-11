@@ -71,13 +71,13 @@ Install node modules based on the `package.json` configuration
 
     npm install
 
-Copy all example configuration files into place
-
-    grunt init
-
 Install front-end package dependencies with Bower based on the `bower.json` configuration
 
     bower install
+
+Copy all `example/` configuration files into place
+
+    grunt init
 
 At this point the MEANR application is ready to run and if you have MongoDB and Redis installed you can proceed without the virtual machine.
 
@@ -110,7 +110,7 @@ Download and install Chef community cookbooks using [Berkshelf[(http://berkshelf
     berks
     berks install --path cookbooks
 
-The rest of our Dev Ops are command line operations, rather than type them out we'll use a utility Ruby script using [Thor](http://whatisthor.com/).
+The rest of our Dev Ops are command line operations, rather than type them out we'll use a utility/wrapper Ruby script using [Thor](http://whatisthor.com/).
 
 [Thor](http://whatisthor.com/) is a toolkit for building powerful command-line interfaces.
 
@@ -150,6 +150,7 @@ This will be the email address the server sends email to from it's various syste
 2. Copy your `~/.ssh/id_rsa.pub` PEM RSA private key into the `ssh_keys` property of the `deploy` user in `chef/kitchen/data_bags/users/deploy.json`
 This is for the `deploy` user account so you will have no password DevOps access.
 
+
     thor devops:cook
 
 This should now complete the virtual machine setup.
@@ -158,7 +159,17 @@ We can now start the MEANR app, change back to the base directory `meanr-full-st
 
     cd ../../
 
-Before starting the MEANR app you can seed the database with a test user and some articles.
+Start the application with `grunt`
+
+    grunt
+
+View the application in Chrome
+
+    google-chrome http://meanr.local:3000/
+
+Optionally you can seed the new MEANR database with a test user and some articles.
+
+The fixture data is from the json files in `test/fixtures/db/`
 
 Run the bundle command to install Capistrano (Ruby)
 
@@ -168,14 +179,6 @@ Run the bundle command to install Capistrano (Ruby)
 There is also a database collection drop command
 
     cap local mongodb_drop
-
-Start the application with `grunt`
-
-    grunt
-
-View the application in Chrome
-
-    google-chrome http://meanr.local:3000/
 
 If you seeded the database you can log in right away with these user/pass credentials
 
@@ -197,8 +200,8 @@ Next steps, check out the [Testing](testing.md) documentation and run the test s
     git checkout develop
     git flow init
     npm install
-    grunt init
     bower install
+    grunt init
     cd chef/
     bundle
     vagrant up

@@ -72,7 +72,7 @@ class Devops < Thor
   desc "bootstrap", "Bootstraps server with Ruby and Chef"
   method_options :hostname => vm_hostname, :user => vm_user
   def bootstrap
-    cmd = "ssh #{options[:user]}@#{options[:hostname]} 'curl -L https://www.opscode.com/chef/install.sh | sudo bash'"
+    cmd = "ssh #{options[:user]}@#{options[:hostname]} \"if ! [ -e /opt/chef/bin/chef-solo ]; then curl -L https://www.opscode.com/chef/install.sh | sudo bash; else echo 'Chef [OK]' ; fi\""
     puts cmd; system cmd
   end
 
