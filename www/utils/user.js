@@ -6,7 +6,8 @@ exports.user = function (req) {
   var user;
 
   if (req.user) {
-    user = _.pick(req.user, 'name', 'email', '_id');
+    user = _.pick(req.user, 'email', '_id');
+    user.name = req.user.providers[req.user.currentProvider].name;
   }
   else {
     user = null;

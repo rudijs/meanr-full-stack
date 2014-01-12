@@ -1,6 +1,6 @@
 {
   "name": "meanr-full-stack",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "private": true,
   "scripts": {
     "test": "./node_modules/grunt-mocha-test/node_modules/mocha/bin/_mocha --reporter spec --no-colors test/api/*.js"
@@ -12,6 +12,8 @@
     "winston": "latest",
     "passport": "latest",
     "passport-local": "latest",
+    "passport-github": "latest",
+    "passport-google": "latest",
     "mongoose": "latest",
     "express-winston": "latest",
     "scrypt": "latest",

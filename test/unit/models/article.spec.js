@@ -14,30 +14,40 @@ describe('<Unit Test>', function () {
 
     beforeEach(function (done) {
 
-      // Create a test database user
       var user = new User({
-        name: 'Mr Magoo',
-        email: 'mr@magoo.com',
-        username: 'mrmagoo',
-        password: 'asdf'
+        email: 'net@citizen',
+        currentProvider: 'local',
+        providers: {
+          local: {
+            name: 'Net Citizen',
+            username: 'netcitizen',
+            password: 'abcdef'
+          }
+        }
       });
 
-      // Fixture contains all permitted characters
-      // letters, numbers, spaces, hyphens and periods
-      article = new Article({
-        title: 'Test Title',
-        content: 'Test Content',
-        user: user
-      });
+      user.save(function (err) {
 
-      done();
+        if (err) {
+          console.log(err.toString());
+        }
+
+        article = new Article({
+          title: 'Test Title',
+          content: 'Test Content',
+          user: user
+        });
+
+        done();
+
+      });
 
     });
 
     describe('Method Save', function () {
 
       it('should save an article', function (done) {
-        return article.save(function (err) {
+        article.save(function (err) {
           should.not.exist(err);
           done();
         });
@@ -62,7 +72,7 @@ describe('<Unit Test>', function () {
           content: 'Test Content'
         });
 
-        return article.save(function (err) {
+        article.save(function (err) {
           should.exist(err);
           done();
         });
@@ -71,7 +81,7 @@ describe('<Unit Test>', function () {
 
       it('should show an error without a TITLE value', function (done) {
         article.title = '';
-        return article.save(function (err) {
+        article.save(function (err) {
           should.exist(err);
           done();
         });
@@ -79,7 +89,7 @@ describe('<Unit Test>', function () {
 
       it('should show an error if TITLE is too short', function (done) {
         article.title = 'AB';
-        return article.save(function (err) {
+        article.save(function (err) {
           should.exist(err);
           done();
         });
@@ -91,7 +101,7 @@ describe('<Unit Test>', function () {
           title: 'Test Title'
         });
 
-        return article.save(function (err) {
+        article.save(function (err) {
           should.exist(err);
           done();
         });
@@ -104,7 +114,7 @@ describe('<Unit Test>', function () {
           title: 'Test Title'
         });
 
-        return article.save(function (err) {
+        article.save(function (err) {
           should.exist(err);
           done();
         });
@@ -113,7 +123,7 @@ describe('<Unit Test>', function () {
 
       it('should show an error without a CONTENT value', function (done) {
         article.content = '';
-        return article.save(function (err) {
+        article.save(function (err) {
           should.exist(err);
           done();
         });
@@ -121,7 +131,7 @@ describe('<Unit Test>', function () {
 
       it('should show an error if CONTENT is too short', function (done) {
         article.content = 'XY';
-        return article.save(function (err) {
+        article.save(function (err) {
           should.exist(err);
           done();
         });

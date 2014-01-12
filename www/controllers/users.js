@@ -1,8 +1,14 @@
-/**
- * Module dependencies.
- */
-var mongoose = require('mongoose'),
+var config = require('../../config/config'),
+  logger = require(config.get('root') + '/config/log'),
+  mongoose = require('mongoose'),
   User = mongoose.model('User');
+
+/**
+ * Sigin via AngularJS view
+ */
+exports.signin = function (req, res) {
+  res.redirect('/#/signin');
+};
 
 /**
  * Auth callback
@@ -32,29 +38,40 @@ exports.session = function (req, res) {
  */
 exports.create = function (req, res) {
 
-  var user = new User(req.body);
+  var email = req.body.email;
 
-  user.provider = 'local';
+  var provider = {
+    name: req.body.name,
+    username: req.body.username,
+    password: req.body.password
+  };
+
+  var user = new User({
+    email: email,
+    currentProvider: 'local',
+    providers: {}
+  });
+
+  user.providers.local = provider;
 
   user.save(function (err) {
-
     if (err) {
-      //return res.redirect('/');
-      return res.render('/#/signup', {
-        errors: err.message,
-        user: user
-      });
+      logger.error('LocalStrategy create save error: ' + err.toString());
+      return res.redirect('/#/signup?msg=E1100');
     }
 
+    logger.info(['New User:', user.email, user.currentProvider].join(' '));
+
     req.logIn(user, function (err) {
-
       if (err) {
-        return next(err);
+        logger.error('LocalStrategy create logIn error: ' + err.toString());
+        //return next(err);
+        return res.redirect('/500');
       }
-
       return res.redirect('/');
 
     });
 
   });
+
 };

@@ -43,7 +43,17 @@ describe('<Unit Test>', function () {
       // mock expressjs/connect request object
       var req = {};
       req.host = 'meanr.local';
-      req.user = {name: 'Joe Blow', email: 'example@email.com', _id: 'abc123'};
+      req.user = {
+        email: 'example@email.com',
+        currentProvider: 'local',
+        _id: 'abc123',
+        providers: {
+          local: {
+            name: 'Net Citizen',
+            username: 'netcitizen'
+          }
+        }
+      };
 
       // mock expressjs/connect response object
       var res = {};
@@ -55,7 +65,7 @@ describe('<Unit Test>', function () {
         should.exist(templateVars);
         templateVars.hostname.should.equal('meanr.local');
         templateVars.title.should.equal('MEANR');
-        templateVars.user.should.equal('{"name":"Joe Blow","email":"example@email.com","_id":"abc123"}');
+        templateVars.user.should.equal('{"email":"example@email.com","_id":"abc123","name":"Net Citizen"}');
 
         done();
       };

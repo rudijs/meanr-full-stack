@@ -18,7 +18,10 @@ angular.module('meanr')
     // If login error flagged in URL set scope value to show user
     $scope.showLoginErrorMessage = function () {
       var params = $location.search();
-      if (params.msg === 'error') {
+      if (params.msg === 'E1100') {
+        $scope.message = 'Error: Duplicate. This account already exists.';
+      }
+      else if (params.msg === 'error') {
         $scope.message = 'Invalid email or password.';
       }
     };

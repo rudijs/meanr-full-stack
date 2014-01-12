@@ -54,7 +54,7 @@ mongoose.connect(dbURI, {server: {auto_reconnect: true}});
 // Bootstrap models
 var models_path = config.get('root') + '/www/models';
 fs.readdirSync(models_path).forEach(function (file) {
-  if (!file.match(/spec.js/)) {
+  if (file.match(/\.js$/)) {
     require(models_path + '/' + file);
   }
 });

@@ -155,9 +155,20 @@ This is for the `deploy` user account so you will have no password DevOps access
 
 This should now complete the virtual machine setup.
 
-We can now start the MEANR app, change back to the base directory `meanr-full-stack/`
+Before we finally start up the web application there's one more important step.
+
+The MongoDB indexing strategy we're using keep the database indexes outside of the models.
+
+We do it this way for performance reasons. See `/docs/database.md` for more details.
+
+An import index we must use is the unique constraint on the `email` field in the `users` collection.
+
+Lets add that, change back to the base directory `meanr-full-stack/`
 
     cd ../../
+    cap local mongodb_index
+
+We can now start the MEANR app,
 
 Start the application with `grunt`
 

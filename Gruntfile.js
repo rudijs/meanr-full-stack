@@ -39,8 +39,8 @@ module.exports = function (grunt) {
           'www/views/**/*.html',
           'test/unit/**/*.js'
         ],
-        tasks: ['jshint', 'test'],
-        //tasks: ['jshint'],
+        //tasks: ['jshint', 'test'],
+        tasks: ['jshint'],
         options: {
           livereload: true
         }
@@ -137,8 +137,8 @@ module.exports = function (grunt) {
     concurrent: {
       server: {
         tasks: [
-          'nodemon'
-          //'watch',
+          'nodemon',
+          'watch'
           //'karma:unit'
         ],
         options: {
@@ -415,7 +415,9 @@ module.exports = function (grunt) {
           captureFile: 'test/coverage/coverage.html'
         },
         src: [
-          'www/**/*.js'
+          'www/controllers/*.js',
+          'www/models/*.js',
+          'www/utils/*.js'
         ]
       }
     },

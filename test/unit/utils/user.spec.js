@@ -12,13 +12,26 @@ describe('<Unit Test>', function () {
     it('returns a user object with restricted properties from passportjs req.user', function (done) {
 
       // mock req.user obejct setup by passportjs has all properties from the mongoose model
-      var req = { user: {name: 'Joe Blow', email: 'example@email.com', _id: 'abc123', hashed_password: 'xxxxxxx'} };
+      var req = {
+        user: {
+          email: 'example@email.com',
+          currentProvider: 'local',
+          _id: 'abc123',
+          providers: {
+            local: {
+              name: 'Net Citizen',
+              username: 'netcitizen',
+              password: 'xxxxxxxxxxx'
+            }
+          }
+        }
+      };
 
       // #user
       var user = userUtil.user(req);
 
       // tests
-      user.name.should.equal('Joe Blow');
+      user.name.should.equal('Net Citizen');
       user.email.should.equal('example@email.com');
       user._id.should.equal('abc123');
 

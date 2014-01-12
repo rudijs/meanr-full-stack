@@ -25,7 +25,8 @@ var ArticleSchema = new Schema({
     trim: true,
     required: true
   }
-});
+},
+  { autoIndex: false });
 
 /**
  * Validations
