@@ -60,6 +60,8 @@ exports.create = function (req, res) {
       return res.redirect('/#/signup?msg=E1100');
     }
 
+    logger.info(['New User:', user.email, user.currentProvider].join(' '));
+
     req.logIn(user, function (err) {
       if (err) {
         logger.error('LocalStrategy create logIn error: ' + err.toString());
