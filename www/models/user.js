@@ -9,10 +9,14 @@ var mongoose = require('mongoose'),
  * User Schema
  */
 var UserSchema = new Schema({
-  email: { type: String, required: true, unique: true },
+  email: {
+    type: String,
+    unique: true
+  },
   currentProvider: String,
   providers: Schema.Types.Mixed
-});
+},
+  { autoIndex: false });
 
 /**
  * Virtuals
@@ -56,37 +60,37 @@ UserSchema.path('email').validate(function (email) {
 
 }, 'Email cannot be blank');
 
-UserSchema.path('providers').validate(function (providers) {
-
-  // If using a social login oauth strategy, don't validate
-  if (this.currentProvider !== 'local') { return true; }
-
-  if (!blankValidator(providers.local.name)) { return false; }
-
-}, 'Name cannot be blank');
-
-UserSchema.path('providers').validate(function (providers) {
-
-  // If using a social login oauth strategy, don't validate
-  if (this.currentProvider !== 'local') { return true; }
-
-  if (!blankValidator(providers.local.username)) { return false; }
-
-}, 'Username cannot be blank');
-
-UserSchema.path('providers').validate(function (providers) {
-
-  // If using a social login oauth strategy, don't validate
-  if (this.currentProvider !== 'local') { return true; }
-
-  // Only validate on new records, exiting passwords will be hashed and longer than 12 characters.
-  if (!this.isNew) {
-    return true;
-  }
-
-  if (!passwordValidator(providers.local.password)) { return false; }
-
-}, 'Password must be 6-12 characters');
+//UserSchema.path('providers').validate(function (providers) {
+//
+//  // If using a social login oauth strategy, don't validate
+//  if (this.currentProvider !== 'local') { return true; }
+//
+//  if (!blankValidator(providers.local.name)) { return false; }
+//
+//}, 'Name cannot be blank');
+//
+//UserSchema.path('providers').validate(function (providers) {
+//
+//  // If using a social login oauth strategy, don't validate
+//  if (this.currentProvider !== 'local') { return true; }
+//
+//  if (!blankValidator(providers.local.username)) { return false; }
+//
+//}, 'Username cannot be blank');
+//
+//UserSchema.path('providers').validate(function (providers) {
+//
+//  // If using a social login oauth strategy, don't validate
+//  if (this.currentProvider !== 'local') { return true; }
+//
+//  // Only validate on new records, exiting passwords will be hashed and longer than 12 characters.
+//  if (!this.isNew) {
+//    return true;
+//  }
+//
+//  if (!passwordValidator(providers.local.password)) { return false; }
+//
+//}, 'Password must be 6-12 characters');
 
 
 /**

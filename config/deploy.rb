@@ -106,13 +106,23 @@ task :mongodb_drop do
   puts "Dropping MongoDB #{fetch(:mongodb_name)} collections"
 
   on roles(:db), in: :sequence do |server|
-  fetch(:seed_files).each do |linked_file|
+    fetch(:seed_files).each do |linked_file|
 
-    collection_name = File.basename(linked_file).split('.')[0]
-    execute "echo 'db.#{collection_name}.drop()' | mongo #{fetch(:mongodb_name)}"
+      collection_name = File.basename(linked_file).split('.')[0]
+      execute "echo 'db.#{collection_name}.drop()' | mongo #{fetch(:mongodb_name)}"
+    end
   end
 end
+
+desc "Index MongoDB"
+task :mongodb_index do
+
+  on roles(:db), in: :sequence do |server|
+    execute "mongo #{fetch(:mongodb_name)} < #{current_path}/www/indexes/users.js"
+  end
+
 end
 
 before :deploy, :rsync_configs
 before :deploy, :clean_node_gyp
+
