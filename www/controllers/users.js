@@ -63,7 +63,8 @@ exports.create = function (req, res) {
     req.logIn(user, function (err) {
       if (err) {
         logger.error('LocalStrategy create logIn error: ' + err.toString());
-        return next(err);
+        //return next(err);
+        return res.redirect('/500');
       }
       return res.redirect('/');
 

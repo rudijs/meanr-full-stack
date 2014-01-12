@@ -19,7 +19,7 @@ describe('<Unit Test>', function () {
 
   describe('Users Controller', function () {
 
-    it('#authCallback() redirects to default route', function (done) {
+    it('#authCallback redirects to default route', function (done) {
 
       // mock expressjs/connect request object
       var req = {};
@@ -40,7 +40,24 @@ describe('<Unit Test>', function () {
 
     });
 
-    it('#signout() calls req.logout() and redirect to default route', function (done) {
+    it('#signin calls redirects to default route', function (done) {
+
+      var req = {};
+      var res = {};
+      res.redirect = function (url) {
+
+        should.exist(url);
+        url.should.equal('/#/signin');
+
+        done();
+      };
+
+      // run controller
+      controller.signin(req, res);
+
+    });
+
+    it('#signout calls req.logout() and redirect to default route', function (done) {
 
       // mock expressjs/connect request object
       var req = {};
@@ -64,7 +81,7 @@ describe('<Unit Test>', function () {
 
     });
 
-    it('#session() redirects to default route', function (done) {
+    it('#session redirects to default route', function (done) {
 
       // mock expressjs/connect request object
       var req = {};
@@ -85,7 +102,7 @@ describe('<Unit Test>', function () {
 
     });
 
-    it('#create() adds a new user then calls passportjs.login() and redirects to the default route', function (done) {
+    it('#create adds a new user then calls passportjs.login() and redirects to the default route', function (done) {
 
       // mock expressjs/connect request object
       var req = {};
@@ -121,7 +138,7 @@ describe('<Unit Test>', function () {
 
     });
 
-    it('#create() handles database validation errors', function (done) {
+    it('#create handles database validation errors', function (done) {
 
       // mock expressjs/connect request object
       var req = {};
@@ -134,6 +151,42 @@ describe('<Unit Test>', function () {
         // tests
         should.exist(url);
         url.should.equal('/#/signup?msg=E1100');
+
+        done();
+
+      };
+
+      // run controller
+      controller.create(req, res);
+
+    });
+
+    it('#create handles req.LogIn errors', function (done) {
+
+
+
+
+      // mock expressjs/connect request object
+      var req = {};
+      req.body = {
+        name: config.get('testCredentials').name,
+        email: config.get('testCredentials').email,
+        username: config.get('testCredentials').username,
+        password: config.get('testCredentials').password
+      };
+      req.logIn = function (user, callback) {
+
+        callback(new Error('Unable to log user in'), user);
+
+      };
+
+      // mock expressjs/connect response object
+      var res = {};
+      res.redirect = function (url) {
+
+        // tests
+        should.exist(url);
+        url.should.equal('/500');
 
         done();
 

@@ -97,10 +97,7 @@ UserSchema.pre('save', function (next) {
     return next();
   }
 
-  //if (!validatePresenceOf(this.password) && authTypes.indexOf(this.provider) === -1) {
   if (this.currentProvider === 'local') {
-    //var hashedPassword = this.encryptPassword(this.providers.local.password);
-    //this.providers.local.password = hashedPassword;
     this.password = this.providers.local.password;
     next();
   }

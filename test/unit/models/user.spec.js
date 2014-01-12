@@ -41,7 +41,7 @@ describe('<Unit Test>', function () {
         });
       });
 
-      it('#authenticate() returns true for correct password', function (done) {
+      it('#authenticate returns true for correct password', function (done) {
 
         var plainPassword = user.providers.local.password;
 
@@ -57,7 +57,7 @@ describe('<Unit Test>', function () {
 
       });
 
-      it('#authenticate() returns false for incorrect password', function (done) {
+      it('#authenticate returns false for incorrect password', function (done) {
 
         user.save(function (err) {
 
@@ -84,6 +84,12 @@ describe('<Unit Test>', function () {
           done();
 
         });
+
+      });
+
+      it('#encryptPassword return empty string if no password input', function () {
+
+        user.encryptPassword().should.equal('');
 
       });
 
