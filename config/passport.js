@@ -66,6 +66,7 @@ module.exports = function (passport) {
     }
   ));
 
+  // Use github strategy
   passport.use(new GitHubStrategy({
 
       clientID: config.get('github').clientID,
@@ -187,5 +188,6 @@ module.exports = function (passport) {
       });
     }
   ));
+
 
 };
