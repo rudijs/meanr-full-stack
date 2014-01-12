@@ -3,70 +3,90 @@
  */
 var mongoose = require('mongoose'),
   Schema = mongoose.Schema,
-  scrypt = require('scrypt'),
-  authTypes = ['github', 'twitter', 'facebook', 'google'];
-
+  scrypt = require('scrypt');
 
 /**
  * User Schema
  */
 var UserSchema = new Schema({
-  name: String,
-  email: String,
-  username: String,
-  provider: String,
-  hashed_password: String
+  email: { type: String, required: true, unique: true },
+  currentProvider: String,
+  providers: Schema.Types.Mixed
 });
 
 /**
  * Virtuals
  */
-UserSchema.virtual('password').set(function (password) {
-  this._password = password;
-  this.hashed_password = this.encryptPassword(password);
-}).get(function () {
-    return this._password;
+UserSchema.virtual('password')
+  .get(function () {
+    return this.providers.local.password;
+  })
+  .set(function (password) {
+    this.providers.local.password = this.encryptPassword(password);
   });
 
 /**
  * Validations
  */
-var validatePresenceOf = function (value) {
-  return value && value.length;
+
+//var validatePresenceOf = function (value) {
+//  return value && value.length;
+//};
+
+var blankValidator = function (value) {
+  if (value && value.length >= 1) {
+    return true;
+  }
+  return false;
 };
 
-// the below 4 validations only apply if you are signing up traditionally
-UserSchema.path('name').validate(function (name) {
-  // if you are authenticating by any of the oauth strategies, don't validate
-  if (authTypes.indexOf(this.provider) !== -1) {
+var passwordValidator = function (value) {
+  if (value && value.length >= 6 && value.length <= 12) {
     return true;
   }
-  return name.length;
-}, 'Name cannot be blank');
+  return false;
+};
 
 UserSchema.path('email').validate(function (email) {
-  // if you are authenticating by any of the oauth strategies, don't validate
-  if (authTypes.indexOf(this.provider) !== -1) {
-    return true;
-  }
-  return email.length;
+
+  // If using a social login oauth strategy, don't validate
+  if (this.currentProvider !== 'local') { return true; }
+
+  if (!blankValidator(email)) { return false; }
+
 }, 'Email cannot be blank');
 
-UserSchema.path('username').validate(function (username) {
-  // if you are authenticating by any of the oauth strategies, don't validate
-  if (authTypes.indexOf(this.provider) !== -1) {
-    return true;
-  }
-  return username.length;
+UserSchema.path('providers').validate(function (providers) {
+
+  // If using a social login oauth strategy, don't validate
+  if (this.currentProvider !== 'local') { return true; }
+
+  if (!blankValidator(providers.local.name)) { return false; }
+
+}, 'Name cannot be blank');
+
+UserSchema.path('providers').validate(function (providers) {
+
+  // If using a social login oauth strategy, don't validate
+  if (this.currentProvider !== 'local') { return true; }
+
+  if (!blankValidator(providers.local.username)) { return false; }
+
 }, 'Username cannot be blank');
 
-UserSchema.path('hashed_password').validate(function (hashed_password) {
-  // if you are authenticating by any of the oauth strategies, don't validate
-  if (authTypes.indexOf(this.provider) !== -1) {
+UserSchema.path('providers').validate(function (providers) {
+
+  // If using a social login oauth strategy, don't validate
+  if (this.currentProvider !== 'local') { return true; }
+
+  // Only validate on new records, exiting passwords will be hashed and longer than 12 characters.
+  if (!this.isNew) {
     return true;
   }
-  return hashed_password.length;
-}, 'Password cannot be blank');
+
+  if (!passwordValidator(providers.local.password)) { return false; }
+
+}, 'Password must be 6-12 characters');
 
 
 /**
@@ -77,12 +97,19 @@ UserSchema.pre('save', function (next) {
     return next();
   }
 
-  if (!validatePresenceOf(this.password) && authTypes.indexOf(this.provider) === -1) {
-    next(new Error('Invalid password'));
-  } else {
+  //if (!validatePresenceOf(this.password) && authTypes.indexOf(this.provider) === -1) {
+  if (this.currentProvider === 'local') {
+    //var hashedPassword = this.encryptPassword(this.providers.local.password);
+    //this.providers.local.password = hashedPassword;
+    this.password = this.providers.local.password;
     next();
   }
+  else {
+    next();
+  }
+
 });
+
 
 /**
  * Methods
@@ -96,7 +123,8 @@ UserSchema.methods = {
    * @api public
    */
   authenticate: function (plainText) {
-    return scrypt.verifyHashSync(this.hashed_password, plainText);
+//    return scrypt.verifyHashSync(this.hashedPassword, plainText);
+    return scrypt.verifyHashSync(this.password, plainText);
   },
 
   /**

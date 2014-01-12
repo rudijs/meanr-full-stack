@@ -1,5 +1,9 @@
-<div class="row" data-ng-controller="UsersCtrl">
+<div class="row" data-ng-controller="UsersCtrl" data-ng-init="showLoginErrorMessage()">
     <div class="small-4 columns">
+
+        <br/>
+        <div data-alert="" class="alert-box alert round" ng-bind='message' ng-show="message.length">
+        </div>
 
         <form action="/users" method="post">
             <fieldset>

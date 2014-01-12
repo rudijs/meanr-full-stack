@@ -12,6 +12,8 @@
     "winston": "latest",
     "passport": "latest",
     "passport-local": "latest",
+    "passport-github": "latest",
+    "passport-google": "latest",
     "mongoose": "latest",
     "express-winston": "latest",
     "scrypt": "latest",

@@ -24,12 +24,18 @@ describe('<Unit Test>', function () {
 
       // Create a test database user
       var user = new User({
-        name: config.get('testCredentials').name,
         email: config.get('testCredentials').email,
-        username: config.get('testCredentials').username,
-        password: config.get('testCredentials').password
+        currentProvider: 'local',
+        providers: {
+          local: {
+            name: config.get('testCredentials').name,
+            username: config.get('testCredentials').username,
+            password: config.get('testCredentials').password
+          }
+        }
       });
-      return user.save(function (err) {
+
+      user.save(function (err) {
         should.not.exist(err);
         store.user = user;
         done();
@@ -45,7 +51,7 @@ describe('<Unit Test>', function () {
         content: 'Test Content',
         user: store.user
       });
-      return article.save(function (err) {
+      article.save(function (err) {
         should.not.exist(err);
         store.articleId = article._id;
         done();

@@ -17,11 +17,11 @@
     "name": "Net Citizen",
     "email": "net@citizen.com",
     "username": "netcitizen",
-    "password": "asdf"
+    "password": "abcdef"
   },
 
   "apiTest": {
     "email": "net@citizen.com",
-    "password": "asdf"
+    "password": "abcdef"
   }
 }

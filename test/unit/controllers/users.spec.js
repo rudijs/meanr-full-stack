@@ -90,10 +90,10 @@ describe('<Unit Test>', function () {
       // mock expressjs/connect request object
       var req = {};
       req.body = {
-        name: 'Mr Magoo',
-        email: 'mr@magoo.com',
-        username: 'mrmagoo',
-        password: 'asdf'
+        name: config.get('testCredentials').name,
+        email: config.get('testCredentials').email,
+        username: config.get('testCredentials').username,
+        password: config.get('testCredentials').password
       };
 
       // mock passportjs login()
@@ -129,13 +129,11 @@ describe('<Unit Test>', function () {
 
       // mock expressjs/connect response object
       var res = {};
-      res.render = function (path, templateVars) {
+      res.redirect = function (url) {
 
-        should.exist(path);
-        path.should.equal('/#/signup');
-
-        should.exist(templateVars);
-        templateVars.errors.should.equal('Invalid password');
+        // tests
+        should.exist(url);
+        url.should.equal('/#/signup?msg=E1100');
 
         done();
 

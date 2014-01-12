@@ -13,14 +13,18 @@ describe('<Unit Test>', function () {
 
     beforeEach(function (done) {
 
-      // Fixture contains all permitted characters
-      // letters, numbers, spaces, hyphens and periods
       user = new User({
-        name: 'Mr Magoo',
-        email: 'mr@magoo.com',
-        username: 'mrmagoo',
-        password: 'asdf'
+        email: 'net@citizen',
+        currentProvider: 'local',
+        providers: {
+          local: {
+            name: 'Net Citizen',
+            username: 'netcitizen',
+            password: 'abcdef'
+          }
+        }
       });
+
       done();
 
     });
@@ -28,33 +32,58 @@ describe('<Unit Test>', function () {
     describe('Method Save', function () {
 
       it('should save without problems', function (done) {
-        return user.save(function (err) {
+        user.save(function (err) {
+
+          // test
           should.not.exist(err);
+
           done();
         });
       });
 
       it('#authenticate() returns true for correct password', function (done) {
 
-        // test
-        user.authenticate(user.password).should.be.true;
+        var plainPassword = user.providers.local.password;
 
-        done();
+        user.save(function (err) {
+
+          // test
+          should.not.exist(err);
+          user.authenticate(plainPassword).should.be.true;
+
+          done();
+
+        });
 
       });
 
       it('#authenticate() returns false for incorrect password', function (done) {
 
-        // test
-        user.authenticate('1234').should.be.false;
+        user.save(function (err) {
 
-        done();
+          // test
+          should.not.exist(err);
+          user.authenticate('1234').should.be.false;
+
+          done();
+
+        });
 
       });
 
-      it('#encryptPassword return empty string if no password input', function () {
+      it('should not store plain text password', function (done) {
 
-        user.encryptPassword().should.equal('');
+        var plainPassword = user.providers.local.password;
+
+        user.save(function (err) {
+
+          // test
+          should.not.exist(err);
+          user.providers.local.password.should.not.equal(plainPassword);
+
+          done();
+
+        });
 
       });
 

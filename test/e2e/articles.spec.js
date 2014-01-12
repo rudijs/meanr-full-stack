@@ -25,8 +25,8 @@ describe('meanr', function () {
 
       meanrPage.get('/#/signin');
 
-      meanrPage.setEmail('net@citizen.com');
-      meanrPage.setPassword('asdf');
+      meanrPage.setEmail(config.get('apiTest').email);
+      meanrPage.setPassword(config.get('apiTest').password);
 
       meanrPage.clickSignIn();
 

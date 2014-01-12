@@ -1,17 +1,16 @@
 var env = process.env.NODE_ENV = process.env.NODE_ENV || 'development',
   config = require('./config'),
-// Custom winston logger
+  // Custom winston logger
   logger = require('./log'),
   express = require('express'),
   params = require('express-params'),
   redisClient = require('./redis'),
   redisStore = require('connect-redis')(express),
   flash = require('connect-flash'),
-// Express HTTP access and error logging
-// Default winston logger for express-winston to use
+  // Express HTTP access and error logging
+  // Default winston logger for express-winston to use
   winston = require('winston'),
-  expressWinston = require('express-winston'),
-  userUtil = require('../www/utils/user');
+  expressWinston = require('express-winston');
 
 module.exports = function (app, passport) {
 
@@ -118,8 +117,6 @@ module.exports = function (app, passport) {
 
       logger.error('500: ' + req.originalUrl);
 
-      var user = userUtil.user(req);
-
       // Error message to display
       var errorMsg;
 
@@ -131,6 +128,10 @@ module.exports = function (app, passport) {
       }
 
       res.status(500).render('500.html', { error: errorMsg });
+
+      // Fix JSHint's warning of next not being used by defining it
+      next = next;
+
       return;
     }
 
