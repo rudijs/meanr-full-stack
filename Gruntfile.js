@@ -415,7 +415,9 @@ module.exports = function (grunt) {
           captureFile: 'test/coverage/coverage.html'
         },
         src: [
-          'www/**/*.js'
+          'www/controllers/*.js',
+          'www/models/*.js',
+          'www/utils/*.js'
         ]
       }
     },
