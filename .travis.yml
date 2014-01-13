@@ -24,3 +24,4 @@ script:
   - grunt test-travis
   - mongoimport --db meanr-test --collection users < test/fixtures/db/users.json
   - npm test
+  - grunt jshint

@@ -13,7 +13,6 @@ exports.signin = function (req, res) {
 /**
  * Auth callback
  */
-//exports.authCallback = function(req, res, next) {
 exports.authCallback = function (req, res) {
   res.redirect('/');
 };
@@ -60,7 +59,7 @@ exports.create = function (req, res) {
       return res.redirect('/#/signup?msg=E1100');
     }
 
-    logger.info(['New User:', user.email, user.currentProvider].join(' '));
+    logger.info(['New User:', user.email].join(' '));
 
     req.logIn(user, function (err) {
       if (err) {

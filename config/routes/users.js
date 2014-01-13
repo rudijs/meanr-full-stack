@@ -8,33 +8,33 @@ module.exports = function (app, config, passport) {
   app.post('/users', users.create);
 
   // Local strategy route
-  app.post('/users/session', passport.authenticate('local', {
-    failureRedirect: '/#/signin?msg=error',
-    failureFlash: 'Invalid email or password.'
-  }), users.session);
+  app.post('/users/session',
+    passport.authenticate('local', {failureRedirect: '/#/signin?msg=error'}),
+    users.session
+  );
 
   // Github strategy oauth routes
-  app.get('/auth/github', passport.authenticate('github', {
-    failureRedirect: '/#/signin?msg=error'
-  }), users.signin);
+  app.get('/auth/github', passport.authenticate('github'));
 
-  app.get('/auth/github/callback', passport.authenticate('github', {
-    failureRedirect: '/#/signin?msg=error'
-  }), users.authCallback);
+  app.get('/auth/github/callback',
+    passport.authenticate('github', {failureRedirect: '/#/signin?msg=error'}), users.authCallback);
 
   // Google strategy oauth routes
-  app.get('/auth/google', passport.authenticate('google', {
-    failureRedirect: '/#/signin?msg=error',
+  app.get('/auth/google',
+    passport.authenticate('google', {
     scope: [
       'https://www.googleapis.com/auth/userinfo.profile',
       'https://www.googleapis.com/auth/userinfo.email'
     ]
-  }), users.signin);
+  }));
 
-  app.get('/auth/google/callback', passport.authenticate('google', {
-    failureRedirect: '/#/signin?msg=error'
-  }), users.authCallback);
+  app.get('/auth/google/callback',
+    passport.authenticate('google', {failureRedirect: '/#/signin?msg=error'}), users.authCallback);
 
-  //app.get('/users/me', auth.requiresLogin, users.me);
+  // Facebook strategy oauth routes
+  app.get('/auth/facebook', passport.authenticate('facebook', {scope: ['email', 'user_about_me']}));
+
+  app.get('/auth/facebook/callback',
+    passport.authenticate('facebook', {failureRedirect: '/#/signin?msg=error'}), users.authCallback);
 
 };

@@ -4,6 +4,7 @@
 * [Installation](installation.md)
 * [Testing](testing.md)
 * [Workflow](workflow.md)
+* [Authentication](authentication.md)
 * [i18n](i18n.md)
 * [Database](database.md)
 * [Amazon EC2](amazon_ec2.md)

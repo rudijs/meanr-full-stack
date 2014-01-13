@@ -21,7 +21,7 @@
                 <small class="error" ng-show="showClientSideValidationErrors(signinForm.password, 'minlength')">* Please use at least 4 characters</small>
                 <small class="error" ng-show="showClientSideValidationErrors(signinForm.password, 'maxlength')">* Please use at most 12 characters</small>
 
-                <button type="submit" class="button round" ng-disabled="!canSave()" translate="">Sign In</button>
+                <button id="signin" type="submit" class="button round" ng-disabled="!canSave()" translate="">Sign In</button>
 
             </fieldset>
             <input type="hidden" name="_csrf" value="{{csrfToken}}">

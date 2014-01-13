@@ -4,6 +4,7 @@ var config = require('./config'),
   LocalStrategy = require('passport-local').Strategy,
   GitHubStrategy = require('passport-github').Strategy,
   GoogleStrategy = require('passport-google').Strategy,
+  FacebookStrategy = require('passport-facebook').Strategy,
   User = mongoose.model('User');
 
 module.exports = function (passport) {
@@ -49,8 +50,14 @@ module.exports = function (passport) {
           return done(null, false);
         }
 
-        // An email can have several providers which can have different values for the user's name
-        // Update and save the currentProvider property so that when passportjs deserializes
+        // An email can have several providers.
+
+        // A user can have a LOCAL login then add SOCIAL logins
+
+        // A user can have SOCIAL logins but CANNOT ADD a LOCAL login
+
+        // In the case where the user has added social logins to their local login
+        // update and save the currentProvider property so that when passportjs deserializes
         // in future session requests we can access the correct provider name.
         // Ex: user.providers[user.currentProvider].name
         user.currentProvider = 'local';
@@ -66,6 +73,7 @@ module.exports = function (passport) {
     }
   ));
 
+  // Use github strategy
   passport.use(new GitHubStrategy({
 
       clientID: config.get('github').clientID,
@@ -98,6 +106,8 @@ module.exports = function (passport) {
             if (err) {
               logger.error('PassportJS GitHubStrategy save error: ' + err.toString());
             }
+
+            logger.info(['New User:', user.email].join(' '));
             return done(err, user);
           });
         }
@@ -119,6 +129,7 @@ module.exports = function (passport) {
             if (err) {
               logger.error('PassportJS GitHubStrategy save error: ' + err.toString());
             }
+
             return done(err, user);
           });
 
@@ -130,6 +141,7 @@ module.exports = function (passport) {
 
   // Use google strategy
   passport.use(new GoogleStrategy({
+
       clientID: config.get('google').clientID,
       clientSecret: config.get('google').clientSecret,
       returnURL: config.get('google').callbackURL
@@ -158,6 +170,8 @@ module.exports = function (passport) {
             if (err) {
               logger.error('PassportJS GoogleStrategy save error: ' + err.toString());
             }
+
+            logger.info(['New User:', user.email].join(' '));
             return done(err, user);
           });
         }
@@ -179,6 +193,7 @@ module.exports = function (passport) {
             if (err) {
               logger.error('PassportJS GoogleStrategy save error: ' + err.toString());
             }
+
             return done(err, user);
           });
 
@@ -187,5 +202,69 @@ module.exports = function (passport) {
       });
     }
   ));
+
+  passport.use(new FacebookStrategy({
+
+      clientID: config.get('facebook').clientID,
+      clientSecret: config.get('facebook').clientSecret,
+      callbackURL: config.get('facebook').callbackURL
+    },
+    function(accessToken, refreshToken, profile, done) {
+
+      var email = profile.emails[0].value;
+
+      var provider = {
+        name: [ profile.name.givenName, profile.name.familyName ].join(' '),
+        username: profile.username
+      };
+
+      User.findOne({email: email}, function (err, user) {
+
+        if (!user) {
+          user = new User({
+            email: email,
+            currentProvider: 'facebook',
+            providers: {}
+          });
+
+          user.providers.facebook = provider;
+
+          user.save(function (err) {
+            if (err) {
+              logger.error('PassportJS FacebookStrategy save error: ' + err.toString());
+            }
+
+            logger.info(['New User:', user.email].join(' '));
+            return done(err, user);
+          });
+        }
+
+        // Social strategy check this provider exists for this email address else append it
+        else {
+
+          // An email can have several providers which can have different values for the user's name
+          // Update and save the currentProvider property so that when passportjs deserializes
+          // in future session requests we can access the correct provider name.
+          // Ex: user.providers[user.currentProvider].name
+          user.currentProvider = 'facebook';
+
+          // Create or Update provider data every login as what the profile data sent by github might have changed
+          user.providers.facebook = provider;
+          user.markModified('providers');
+
+          user.save(function (err) {
+            if (err) {
+              logger.error('PassportJS FacebookStrategy save error: ' + err.toString());
+            }
+            return done(err, user);
+          });
+
+        }
+
+      });
+
+    }
+  ));
+
 
 };
