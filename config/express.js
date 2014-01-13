@@ -26,8 +26,6 @@ module.exports = function (app, passport) {
 
   app.disable('x-powered-by');
 
-  //app.use(express.favicon());
-
   app.use(express.json());
   app.use(express.urlencoded());
 
@@ -49,13 +47,12 @@ module.exports = function (app, passport) {
     })
   }));
 
-  // connect flash for passportjs flash messages
+  // connect-flash required by passportjs for flash messages
   app.use(flash());
 
   // use passport session
   app.use(passport.initialize());
   app.use(passport.session());
-
 
   app.use(express.csrf());
 
@@ -69,15 +66,10 @@ module.exports = function (app, passport) {
     next();
   });
 
-  app.use(app.router);
-
-  // static files are handled by NGINX in production
-  app.use(express.static([config.get('root'), 'app'].join('/')));
-
   // Logging
 
   // HTTP log
-  // express-winston logger makes sense BEFORE the router.
+  // express-winston logger BEFORE the router.
   app.use(expressWinston.logger({
     transports: [
       new (winston.transports.File)({
@@ -88,8 +80,13 @@ module.exports = function (app, passport) {
     ]
   }));
 
+  app.use(app.router);
+
+  // static files are handled by NGINX in production
+  app.use(express.static([config.get('root'), 'app'].join('/')));
+
   // Error log
-  // express-winston errorLogger makes sense AFTER the router.
+  // express-winston errorLogger AFTER the router.
   app.use(expressWinston.errorLogger({
     transports: [
       new (winston.transports.File)({
