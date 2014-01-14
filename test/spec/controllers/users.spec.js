@@ -82,7 +82,7 @@
         expect($location.path()).toBe('/signup?errors=Please%20fix%20these%20errors:,*%20Name%20cannot%20be%20blank,*%20Email%20cannot%20be%20blank');
 
         // test scope message
-        expect(scope.message).toBe("Please%20fix%20these%20errors:\n*%20Name%20cannot%20be%20blank\n*%20Email%20cannot%20be%20blank");
+        expect(scope.message).toBe('Please%20fix%20these%20errors:\n*%20Name%20cannot%20be%20blank\n*%20Email%20cannot%20be%20blank');
 
       });
 
