@@ -15,8 +15,7 @@ var UserSchema = new Schema({
   },
   currentProvider: String,
   providers: Schema.Types.Mixed
-},
-  { autoIndex: false });
+});
 
 /**
  * Virtuals

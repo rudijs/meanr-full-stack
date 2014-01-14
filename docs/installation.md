@@ -50,20 +50,20 @@ Install global node dependencies `Grunt` and `Bower`
 
     npm install -g grunt-cli bower
 
-Clone the git repository
+Clone the git repository and cd into it
 
     git clone git@github.com:rudijs/meanr-full-stack.git
-
-Switch to the `develop` branch (basically we never work on master)
-
     cd meanr-full-stack/
-    git checkout develop
 
 Install Git Flow - this not essential or required, using Git Flow is recommended
 
     git flow init
 
 Choose all the defaults when prompted above
+
+If you don't install `git flow` checkout the `develop` branch
+
+    git checkout develop
 
 ## Application initialization
 
@@ -208,7 +208,6 @@ Next steps, check out the [Testing](testing.md) documentation and run the test s
     npm install -g grunt-cli bower
     git clone git@github.com:rudijs/meanr-full-stack.git
     cd meanr-full-stack/
-    git checkout develop
     git flow init
     npm install
     bower install

@@ -94,6 +94,12 @@ MongoDB Mongoose Models
     │   ├── article.js
     │   └── user.js
 
+MongoDB Indexes
+
+    www
+    ├── indexes
+    │   └── users.js
+
 MongoDB Seed Data
 
     test

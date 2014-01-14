@@ -20,6 +20,8 @@ The password for the user "Net Citizen" is `asdf`
 
 ### Indexing Strategy
 
+**TODO** Some further investigation into the production indexing strategy.
+
 Database indexes are kept outside of the mongoose models.
 
 As recommended by the [MongooseJS Guide](http://mongoosejs.com/docs/guide.html) auto indexing is off.
