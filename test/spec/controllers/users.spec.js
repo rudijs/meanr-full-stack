@@ -42,7 +42,7 @@
 
       });
 
-      it('$scope.showLoginErrorMessage() sets scope error message if URL parameter flagged', function () {
+      it('$scope.showLoginErrorMessage() sets scope error message if URL msg parameter', function () {
 
         // Set user sign in URL error response
         $location.path('signin?msg=error');
@@ -61,6 +61,28 @@
 
         // test scope message
         expect(scope.message).toBe('Invalid email or password.');
+
+      });
+
+      it('$scope.showLoginErrorMessage() sets scope error message if URL errors parameter', function () {
+
+        // Set user sign in URL error response
+        $location.path('signup?errors=Please%20fix%20these%20errors:,*%20Name%20cannot%20be%20blank,*%20Email%20cannot%20be%20blank');
+
+        // $location.search() does not pick up URL params in Karma.
+        // Don't know why but after tinkering without joy will just mock search() here
+        $location.search = function () {
+          return { 'errors': 'Please%20fix%20these%20errors:,*%20Name%20cannot%20be%20blank,*%20Email%20cannot%20be%20blank'};
+        };
+
+        // run controller
+        scope.showLoginErrorMessage();
+
+        // test URL
+        expect($location.path()).toBe('/signup?errors=Please%20fix%20these%20errors:,*%20Name%20cannot%20be%20blank,*%20Email%20cannot%20be%20blank');
+
+        // test scope message
+        expect(scope.message).toBe('Please%20fix%20these%20errors:\n*%20Name%20cannot%20be%20blank\n*%20Email%20cannot%20be%20blank');
 
       });
 

@@ -1,5 +1,6 @@
 var config = require('../../config/config'),
   logger = require(config.get('root') + '/config/log'),
+  _ = require('lodash'),
   mongoose = require('mongoose'),
   User = mongoose.model('User');
 
@@ -55,8 +56,20 @@ exports.create = function (req, res) {
 
   user.save(function (err) {
     if (err) {
+
+      var errorMessage = '';
+
+      if (err.code && err.code === 11000) {
+        errorMessage = ',This email address already exists';
+      }
+      else {
+        _.keys(err.errors).forEach(function (error) {
+          errorMessage += ',* ' + err.errors[error].message;
+        });
+      }
+
       logger.error('LocalStrategy create save error: ' + err.toString());
-      return res.redirect('/#/signup?msg=E1100');
+      return res.redirect('/#/signup?errors=Please fix these errors:' + encodeURIComponent(errorMessage));
     }
 
     logger.info(['New User:', user.email].join(' '));

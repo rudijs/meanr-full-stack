@@ -56,6 +56,7 @@ The sample application is a simple article CRUD app and comes with unit and end-
 * [Ruby](http://rvm.io/) (2.1.0p0)
 * [VirtualBox](https://www.virtualbox.org/) (4.3.6)
 * [Vagrant](http://www.vagrantup.com/) (1.4.0)
+* [Git](http://git-scm.com/) and [Git-Flow](http://nvie.com/posts/a-successful-git-branching-model/)
 
 ### Development stack:
 
