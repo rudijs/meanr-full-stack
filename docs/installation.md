@@ -25,7 +25,7 @@ A key principle and use of this MEANR stack is deploying the application through
 
 The deployment process relies on domain names which you configure in your **hosts** file
 
-* Unix `/etc/hosts/`
+* Unix `/etc/hosts`
 * Microsoft `%systemroot%\system32\drivers\etc\hosts`
 
 You will need to add two entries to begin with and three more as you deploy onto remote machines
@@ -67,15 +67,15 @@ If you don't install `git flow` checkout the `develop` branch
 
 ## Application initialization
 
-Install node modules based on the `package.json` configuration
+Install node dependencies based on the `package.json` configuration
 
     npm install
 
-Install front-end package dependencies with Bower based on the `bower.json` configuration
+Install front-end dependencies with Bower based on the `bower.json` configuration
 
     bower install
 
-Copy all `example/` configuration files into place
+Copy all `example/*` configuration files into place
 
     grunt init
 
