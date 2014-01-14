@@ -8,8 +8,8 @@ var controller = require(config.get('root') + '/www/controllers/users'),
   should = require('chai').should(),
   assert = require('chai').assert,
   sinon = require('sinon'),
-  mongoose = require('mongoose');
-//User = mongoose.model('User');
+  mongoose = require('mongoose'),
+  User = mongoose.model('User');
 
 
 // Configure Winston logger by using it here, this make the controller log to the test log file.
@@ -150,11 +150,49 @@ describe('<Unit Test>', function () {
 
         // tests
         should.exist(url);
-        url.should.equal('/#/signup?msg=E1100');
+        url.should.equal('/#/signup?errors=Please fix these errors:%2C*%20Name%20cannot%20be%20blank%2C*%20Email%20cannot%20be%20blank');
 
         done();
 
       };
+
+      // run controller
+      controller.create(req, res);
+
+    });
+
+    it('#create handles duplicate email database validation errors', function (done) {
+
+      // mock expressjs/connect request object
+      var req = {};
+      req.body = {
+        name: config.get('testCredentials').name,
+        email: config.get('testCredentials').email,
+        username: config.get('testCredentials').username,
+        password: config.get('testCredentials').password
+      };
+
+      // mock expressjs/connect response object
+      var res = {};
+      res.redirect = function (url) {
+
+        // restore User.save for next tests
+        User.prototype.save.restore();
+
+        // tests
+        should.exist(url);
+        url.should.equal('/#/signup?errors=Please fix these errors:%2CThis%20email%20address%20already%20exists');
+
+        done();
+
+      };
+
+      // Simulate database unique index validation error
+      var stubSave = function (callback) {
+        callback({code: 11000});
+      };
+
+      sinon.stub(User.prototype, 'save', stubSave);
 
       // run controller
       controller.create(req, res);
