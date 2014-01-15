@@ -134,13 +134,13 @@ After the virtual machine has rebooted fix this up with:
 
     thor devops:rebuild
 
-After the virtual machine has rebooted, the up to date server is not ready to be bootstrapped with the dev ops software - Chef Solo.
+After the virtual machine has rebooted, the up to date server is not ready to be bootstrapped with the DevOps software - Chef Solo.
 
 This will download and install Chef with the Chef omnibus installer into the virtual machine:
 
     thor devops:bootstrap
 
-Now that we have a running, up to date server that has the dev ops software (chef solo) installed we are ready to install our databases.
+Now that we have a running, up to date server that has the DevOps software (Chef Solo) installed we are ready to install our databases.
 
 Before we do that update two things in the Chef Ruby code:
 
