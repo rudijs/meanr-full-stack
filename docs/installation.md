@@ -25,7 +25,7 @@ A key principle and use of this MEANR stack is deploying the application through
 
 The deployment process relies on domain names which you configure in your **hosts** file
 
-* Unix `/etc/hosts/`
+* Unix `/etc/hosts`
 * Microsoft `%systemroot%\system32\drivers\etc\hosts`
 
 You will need to add two entries to begin with and three more as you deploy onto remote machines
@@ -67,15 +67,15 @@ If you don't install `git flow` checkout the `develop` branch
 
 ## Application initialization
 
-Install node modules based on the `package.json` configuration
+Install node dependencies based on the `package.json` configuration
 
     npm install
 
-Install front-end package dependencies with Bower based on the `bower.json` configuration
+Install front-end dependencies with Bower based on the `bower.json` configuration
 
     bower install
 
-Copy all `example/` configuration files into place
+Copy all `example/*` configuration files into place
 
     grunt init
 
@@ -108,7 +108,7 @@ After the VM has started change to kitchen/ working directory
 Download and install Chef community cookbooks using [Berkshelf[(http://berkshelf.com/)
 
     berks
-    berks install --path cookbooks
+    berks vendor
 
 The rest of our Dev Ops are command line operations, rather than type them out we'll use a utility/wrapper Ruby script using [Thor](http://whatisthor.com/).
 
@@ -134,13 +134,13 @@ After the virtual machine has rebooted fix this up with:
 
     thor devops:rebuild
 
-After the virtual machine has rebooted, the up to date server is not ready to be bootstrapped with the dev ops software - Chef Solo.
+After the virtual machine has rebooted, the up to date server is not ready to be bootstrapped with the DevOps software - Chef Solo.
 
 This will download and install Chef with the Chef omnibus installer into the virtual machine:
 
     thor devops:bootstrap
 
-Now that we have a running, up to date server that has the dev ops software (chef solo) installed we are ready to install our databases.
+Now that we have a running, up to date server that has the DevOps software (Chef Solo) installed we are ready to install our databases.
 
 Before we do that update two things in the Chef Ruby code:
 
@@ -217,7 +217,7 @@ Next steps, check out the [Testing](testing.md) documentation and run the test s
     vagrant up
     cd kitchen
     berks
-    berks install --path cookbooks
+    berks vendor
     thor devops:sshcopyid
     thor devops:upgrade
     thor devops:rebuild

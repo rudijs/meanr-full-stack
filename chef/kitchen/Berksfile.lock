@@ -1,5 +1,5 @@
 {
-  "sources": {
+  "dependencies": {
     "hostname": {
       "locked_version": "0.1.0"
     },
@@ -19,28 +19,27 @@
       "locked_version": "0.3.5"
     },
     "ntp": {
-      "locked_version": "1.5.0"
+      "locked_version": "1.5.4"
     },
     "nginx": {
-      "locked_version": "2.0.8"
+      "locked_version": "2.2.0"
     },
     "redisio": {
       "locked_version": "1.7.0"
     },
     "mongodb": {
-      "locked_version": "0.13.7"
+      "locked_version": "0.14.4",
+      "git": "git://github.com/edelight/chef-mongodb.git",
+      "ref": "bf396e686706ab7d9294d65ade5be95dc3c8139d"
     },
     "datadog": {
       "locked_version": "1.1.1"
     },
     "apt": {
-      "locked_version": "2.3.0"
+      "locked_version": "2.3.4"
     },
     "bluepill": {
-      "locked_version": "2.3.0"
-    },
-    "rsyslog": {
-      "locked_version": "1.9.0"
+      "locked_version": "2.3.1"
     },
     "build-essential": {
       "locked_version": "1.4.2"
@@ -49,10 +48,13 @@
       "locked_version": "1.1.12"
     },
     "runit": {
-      "locked_version": "1.4.6"
+      "locked_version": "1.5.8"
     },
     "yum": {
-      "locked_version": "2.4.4"
+      "locked_version": "3.0.4"
+    },
+    "yum-epel": {
+      "locked_version": "0.2.0"
     },
     "ulimit": {
       "locked_version": "0.3.2"
@@ -62,6 +64,9 @@
     },
     "chef_handler": {
       "locked_version": "1.1.4"
+    },
+    "rsyslog": {
+      "locked_version": "1.10.2"
     }
   }
 }

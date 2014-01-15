@@ -79,7 +79,7 @@ class Devops < Thor
   desc "cook", "Runs knife solo cook"
   method_options :hostname => vm_hostname, :user => vm_user
   def cook
-    cmd = "knife solo cook --no-chef-check #{options[:user]}@#{options[:hostname]}"
+    cmd = "knife solo cook --no-chef-check --no-berkshelf #{options[:user]}@#{options[:hostname]}"
     puts cmd; system cmd
     cmd = "knife solo clean #{options[:user]}@#{options[:hostname]}"
     puts cmd; system cmd
