@@ -108,7 +108,7 @@ After the VM has started change to kitchen/ working directory
 Download and install Chef community cookbooks using [Berkshelf[(http://berkshelf.com/)
 
     berks
-    berks install --path cookbooks
+    berks vendor
 
 The rest of our Dev Ops are command line operations, rather than type them out we'll use a utility/wrapper Ruby script using [Thor](http://whatisthor.com/).
 
@@ -217,7 +217,7 @@ Next steps, check out the [Testing](testing.md) documentation and run the test s
     vagrant up
     cd kitchen
     berks
-    berks install --path cookbooks
+    berks vendor
     thor devops:sshcopyid
     thor devops:upgrade
     thor devops:rebuild
