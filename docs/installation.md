@@ -13,9 +13,9 @@ This section will take you step by step through the installation of:
 5. Install Chef on to the virtual machine - this is the Ruby dev ops software.
 6. Install the virtual machine software, which includes MongoDB and Redis, with Chef cookbook recipes.
 
-## Installation preparation
+## Core Concepts
 
-A key principle and use of this MEANR stack is deploying the application through several environments.
+A key principle and use of MEANR stack is deploying the application through several environments.
 
 * Local development - You alone
 * Local deployment - You alone to preview what a live deployment will look like
@@ -40,7 +40,7 @@ Where `xxx.xx.xxx.xx` will be real IPs we'll get later on in the process using A
 
 Keep in mind because we are using our local host file the usage of the `meanr.com` domain name will work as we want for us only.
 
-In your real world senario you'd replace `meanr.com` with your real domain name.
+In your real world scenario you'd replace `meanr.com` with your real domain name.
 
 `meanr.com` is an unavailable domain name but for our local environment that doesn't matter.
 
@@ -81,7 +81,7 @@ Copy all `example/*` configuration files into place
 
 At this point the MEANR application is ready to run and if you have MongoDB and Redis installed you can proceed without the virtual machine.
 
-Using a virtual machine is preferred as it keeps everything together nicely and is more team centric and is used for the development deployment.
+Using a virtual machine is preferred as it keeps everything together nicely and is more team centric and also is used for the development deployment.
 
 The development deployment is where you can check and confirm your production builds before pushing them onto the internet.
 
@@ -107,10 +107,11 @@ After the VM has started change to kitchen/ working directory
 
 Download and install Chef community cookbooks using [Berkshelf[(http://berkshelf.com/)
 
-    berks
     berks vendor
 
-The rest of our Dev Ops are command line operations, rather than type them out we'll use a utility/wrapper Ruby script using [Thor](http://whatisthor.com/).
+The rest of our Dev Ops are command line operations.
+
+Rather than type them out we'll use a utility wrapper Ruby script using [Thor](http://whatisthor.com/).
 
 [Thor](http://whatisthor.com/) is a toolkit for building powerful command-line interfaces.
 
@@ -153,45 +154,46 @@ This is for the `deploy` user account so you will have no password DevOps access
 
     thor devops:cook
 
-This should now complete the virtual machine setup.
+This completes the virtual machine setup.
 
-Before we finally start up the web application there's one more important step.
+Before we fire up the MEANR web application we can test our DevOps on the serer with [ServerSpec](http://serverspec.org/)
 
-The MongoDB indexing strategy we're using keep the database indexes outside of the models.
+List the available [ServerSpec](http://serverspec.org/) test suites:
 
-We do it this way for performance reasons. See `/docs/database.md` for more details.
+    rake -T
 
-An import index we must use is the unique constraint on the `email` field in the `users` collection.
+Test our local `production like` development server:
 
-Lets add that, change back to the base directory `meanr-full-stack/`
-
-    cd ../../
-    cap local mongodb_index
+    rake serverspec:dev
 
 We can now start the MEANR app,
 
 Start the application with `grunt`
 
+    cd ../../
     grunt
 
 View the application in Chrome
 
-    google-chrome http://meanr.local:3000/
+    http://meanr.local:3000/
 
-Optionally you can seed the new MEANR database with a test user and some articles.
+We can seed the new MEANR database with a test user and some articles.
 
 The fixture data is from the json files in `test/fixtures/db/`
 
-Run the bundle command to install Capistrano (Ruby)
+We'll use `Capistrano` and install it with the bundle command
 
     bundle
+
+We can now seed the database with:
+
     cap local mongodb_seed
 
-There is also a database collection drop command
+Note: There is also a database collection drop command
 
     cap local mongodb_drop
 
-If you seeded the database you can log in right away with these user/pass credentials
+you can now log in with these user/pass credentials
 
 Email:
 
@@ -216,7 +218,6 @@ Next steps, check out the [Testing](testing.md) documentation and run the test s
     bundle
     vagrant up
     cd kitchen
-    berks
     berks vendor
     thor devops:sshcopyid
     thor devops:upgrade
@@ -226,3 +227,6 @@ Next steps, check out the [Testing](testing.md) documentation and run the test s
     cd ../../
     grunt
     google-chrome http://meanr.local:3000/
+    bundle
+    cap local mongodb_seed
+
