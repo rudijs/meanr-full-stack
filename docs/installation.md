@@ -105,7 +105,7 @@ After the VM has started change to kitchen/ working directory
 
     cd kitchen
 
-Download and install Chef community cookbooks using [Berkshelf[(http://berkshelf.com/)
+Download and install Chef community cookbooks using [Berkshelf](http://berkshelf.com/)
 
     berks vendor
 
