@@ -34,5 +34,8 @@
     "lodash": {
       "dist": "lodash.min.js"
     }
+  },
+  "resolutions": {
+    "angular": "1.2.9"
   }
 }
