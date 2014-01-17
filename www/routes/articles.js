@@ -1,6 +1,8 @@
-module.exports = function (app, config, passport, auth) {
+module.exports = function (app) {
 
-  var articles = require(config.get('root') + '/www/controllers/articles');
+  var articles = require('../controllers/articles');
+
+  var auth = require('../middlewares/authorization');
 
   // URL Parameter Rules
 
