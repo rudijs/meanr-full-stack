@@ -1,6 +1,8 @@
-module.exports = function (app, config, passport) {
+'use strict';
 
-  var users = require(config.get('root') + '/www/controllers/users');
+module.exports = function (app, passport) {
+
+  var users = require('../controllers/users');
 
   app.get('/signout', users.signout);
 
@@ -22,11 +24,11 @@ module.exports = function (app, config, passport) {
   // Google strategy oauth routes
   app.get('/auth/google',
     passport.authenticate('google', {
-    scope: [
-      'https://www.googleapis.com/auth/userinfo.profile',
-      'https://www.googleapis.com/auth/userinfo.email'
-    ]
-  }));
+      scope: [
+        'https://www.googleapis.com/auth/userinfo.profile',
+        'https://www.googleapis.com/auth/userinfo.email'
+      ]
+    }));
 
   app.get('/auth/google/callback',
     passport.authenticate('google', {failureRedirect: '/#/signin?msg=error'}), users.authCallback);
