@@ -14,34 +14,28 @@
 Environment configuration files - the task `grunt init` copies files from the respective `example/` directory into place:
 
     config
-    ├── config.js
     ├── env
-    │   ├── example/
+    │   ├── example
+    │   │   ├── development.json
+    │   │   ├── production.json
+    │   │   ├── test.json
+    │   │   └── travis.json
     │   ├── development.json
     │   ├── production.json
     │   ├── test.json
     │   └── travis.json
-    ├── example/
+    ├── example
+    │   └── config.js
+    ├── config.js
 
-Application configuration files (Express, Logging, Auth middleware, MongoDB, PassportJS, Redis)
+Application configuration files (Express, Logging, MongoDB, PassportJS, Redis)
 
     config
     ├── express.js
     ├── log.js
-    ├── middlewares
-    │   └── authorization.js
     ├── mongodb.js
     ├── passport.js
     ├── redis.js
-
-Express Routes
-
-    config
-    └── routes
-        ├── articles.js
-        ├── default.js
-        ├── package.json
-        └── users.js
 
 Capistrano deployment
 
@@ -62,30 +56,53 @@ Testing
 
 AngularJS application - development
 
-    app/
+    app
+    ├── bower_components
+    ├── favicon.ico
+    ├── images
+    ├── scripts
+    ├── styles
+    └── views
+
+AngularJS auth protected views
+
+    www
+    └── views
+        ├── articles
+        │   ├── create.html
+        │   └── edit.html
 
 AngularJS application - production (concatinated and minified)
 
-    dist/
+    dist
+    ├── bower_components
+    ├── favicon.ico
+    ├── images
+    ├── index.html
+    ├── scripts
+    ├── styles
+    └── views
 
-Express API, utilities **and** auth protected AngularJS templates
+Express controllers, auth middleware, routes, utility functions, index view and 500 page.
 
     www
     ├── controllers
     │   ├── articles.js
     │   ├── default.js
     │   └── users.js
-    ├── models
-    │   ├── article.js
-    │   └── user.js
+    ├── middlewares
+    │   └── authorization.js
+    ├── routes
+    │   ├── articles.js
+    │   ├── default.js
+    │   └── users.js
     ├── utils
+    │   ├── env.js
+    │   ├── requireWalk.js
     │   └── user.js
     └── views
-        ├── articles
-        │   ├── create.html
-        │   └── edit.html
+        ├── 500.html
         └── index.html
-
 
 MongoDB Mongoose Models
 

@@ -1,4 +1,3 @@
-//var env = process.env.NODE_ENV = process.env.NODE_ENV || 'development',
 var config = require('../../config/config'),
   userUtil = require('../utils/user'),
   envUtil = require('../utils/env');

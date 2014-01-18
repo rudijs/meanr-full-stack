@@ -1,11 +1,10 @@
-// Required Modules
 var env = process.env.NODE_ENV = process.env.NODE_ENV || 'development',
   express = require('express'),
-  fs = require('fs'),
   http = require('http'),
   config = require('./config/config'),
   passport = require('passport'),
-  logger = require('./config/log');
+  logger = require('./config/log'),
+  requireWalk = require('./www/utils/requireWalk').requireWalk;
 
 // Expressjs setup
 var app = express();
@@ -20,25 +19,8 @@ require('./config/passport')(passport);
 require('./config/express')(app, passport);
 
 // Expressjs routes
-var routesPath = __dirname + '/www/routes';
-
-var walk = function (path) {
-  fs.readdirSync(path).forEach(function (file) {
-    var newPath = path + '/' + file;
-    var stat = fs.statSync(newPath);
-    if (stat.isFile()) {
-      if (/(.*)\.(js$|coffee$)/.test(file)) {
-        require(newPath)(app, passport);
-      }
-    } else if (stat.isDirectory()) {
-      walk(newPath);
-    }
-  });
-};
-
-walk(routesPath);
-
-//console.log(app.routes);
+var requireRoutes = requireWalk(config.get('root') + '/www/routes');
+requireRoutes(config, app, passport);
 
 // Start web server
 http.createServer(app).listen(app.get('port'), function () {

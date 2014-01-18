@@ -1,8 +1,8 @@
-module.exports = function (app) {
+module.exports = function (config, app) {
 
-  var articles = require('../controllers/articles');
+  var articles = require(config.get('root') + '/www/controllers/articles');
 
-  var auth = require('../middlewares/authorization');
+  var auth = require(config.get('root') + '/www/middlewares/authorization');
 
   // URL Parameter Rules
 
