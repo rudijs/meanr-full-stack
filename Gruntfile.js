@@ -458,6 +458,10 @@ module.exports = function (grunt) {
           args: {} // Target-specific arguments
         }
       }
+    },
+
+    availabletasks: {
+      tasks: {}
     }
 
   });
@@ -485,7 +489,9 @@ module.exports = function (grunt) {
 
   grunt.registerTask('init', ['copy:configs']);
 
-  grunt.registerTask('default', ['concurrent:server']);
+  grunt.registerTask('default', 'availabletasks');
+
+  grunt.registerTask('serve', ['concurrent:server']);
 
   grunt.registerTask('test', ['env:test', 'mochaTest']);
   grunt.registerTask('test-travis', ['env:travis', 'mochaTest']);
