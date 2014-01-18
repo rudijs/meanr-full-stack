@@ -1,8 +1,7 @@
-// Required Modules
 var logger = require('./log'),
   config = require('./config'),
-  fs = require('fs'),
-  mongoose = require('mongoose');
+  mongoose = require('mongoose'),
+  requireWalk = require('../www/utils/requireWalk').requireWalk;
 
 // Build the connection string
 var dbURI = config.get('database').mongodb.uri;
@@ -52,9 +51,5 @@ process.on('SIGINT', function () {
 mongoose.connect(dbURI, {server: {auto_reconnect: true}});
 
 // Bootstrap models
-var models_path = config.get('root') + '/www/models';
-fs.readdirSync(models_path).forEach(function (file) {
-  if (file.match(/\.js$/)) {
-    require(models_path + '/' + file);
-  }
-});
+var requireModels = requireWalk(config.get('root') + '/www/models');
+requireModels();

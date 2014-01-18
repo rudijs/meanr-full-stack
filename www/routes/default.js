@@ -1,7 +1,8 @@
-module.exports = function (app) {
+module.exports = function (config, app) {
 
   // default route
-  var index = require('../controllers/default');
+  var index = require(config.get('root') + '/www/controllers/default');
+
   app.get('/', index.render);
 
   // 500 error page

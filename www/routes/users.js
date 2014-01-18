@@ -1,8 +1,8 @@
 'use strict';
 
-module.exports = function (app, passport) {
+module.exports = function (config, app, passport) {
 
-  var users = require('../controllers/users');
+  var users = require(config.get('root') + '/www/controllers/users');
 
   app.get('/signout', users.signout);
 
