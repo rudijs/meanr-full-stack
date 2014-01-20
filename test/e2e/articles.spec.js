@@ -23,7 +23,7 @@ describe('meanr', function () {
 
     it('should login', function () {
 
-      meanrPage.get('/#/signin');
+      meanrPage.get('/#!/signin');
 
       meanrPage.setEmail(config.get('apiTest').email);
       meanrPage.setPassword(config.get('apiTest').password);
@@ -38,18 +38,18 @@ describe('meanr', function () {
 
     it('should not submit an invalid form', function () {
 
-      meanrPage.get('/#/articles/create');
+      meanrPage.get('/#!/articles/create');
       // Missing all input values
       meanrPage.clickSubmit();
       expect(meanrPage.getCurrentURL()).toMatch('articles\/create$');
 
-      meanrPage.get('/#/articles/create');
+      meanrPage.get('/#!/articles/create');
       // Missing content value
       meanrPage.setTitle('e2e Test Title');
       meanrPage.clickSubmit();
       expect(meanrPage.getCurrentURL()).toMatch('articles\/create$');
 
-      meanrPage.get('/#/articles/create');
+      meanrPage.get('/#!/articles/create');
       // Missing title value
       meanrPage.setContent('e2e Test Content');
       meanrPage.clickSubmit();
@@ -59,7 +59,7 @@ describe('meanr', function () {
 
     it('with a valid form should add a new article then locate to the new object show', function () {
 
-      meanrPage.get('/#/articles/create');
+      meanrPage.get('/#!/articles/create');
 
       meanrPage.setTitle('e2e Test Title');
       meanrPage.setContent('e2e Test Content');
@@ -77,7 +77,7 @@ describe('meanr', function () {
 
     it('should display one or more articles', function () {
 
-      meanrPage.get('/#/articles');
+      meanrPage.get('/#!/articles');
 
       expect(meanrPage.listFirstArticleText()).toMatch('e2e Test Title');
     });
@@ -88,7 +88,7 @@ describe('meanr', function () {
 
     it('should display a article', function () {
 
-      meanrPage.get('/#/articles');
+      meanrPage.get('/#!/articles');
 
       meanrPage.clickListArticle();
 
@@ -102,7 +102,7 @@ describe('meanr', function () {
 
     it('should update a article', function () {
 
-      meanrPage.get('/#/articles');
+      meanrPage.get('/#!/articles');
 
       meanrPage.clickListArticle();
       expect(meanrPage.getCurrentURL()).toMatch('articles\/([0-9a-fA-F]{24})$');
@@ -125,7 +125,7 @@ describe('meanr', function () {
 
     it('should delete a article', function () {
 
-      meanrPage.get('/#/articles');
+      meanrPage.get('/#!/articles');
 
       meanrPage.clickListArticle();
       expect(meanrPage.getCurrentURL()).toMatch('articles\/([0-9a-fA-F]{24})$');
