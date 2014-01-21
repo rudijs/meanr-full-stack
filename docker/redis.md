@@ -1,15 +1,19 @@
-# Redis Docker Notes
+## Redis container
 
 Log in and cd to working directory
 
     sudo docker login
-    cd meanr-full-stack/docker/redis
+    cd docker/build/redis
 
 Build docker redis image
 
     sudo docker build -t rudijs/redis .
 
-Create the container
+Review the new image
+
+    sudo docker images
+
+Run the redis container
 
     sudo docker run -d -p 6379:6379 -name redis rudijs/redis
 
