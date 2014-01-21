@@ -1,3 +1,5 @@
+'use strict';
+
 var config = require('../../config/config'),
   userUtil = require('../utils/user'),
   envUtil = require('../utils/env');

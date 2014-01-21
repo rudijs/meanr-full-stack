@@ -1,3 +1,5 @@
+'use strict';
+
 var env = process.env.NODE_ENV = process.env.NODE_ENV || 'development',
   winston = require('winston'),
   config = require('./config');

@@ -1,3 +1,5 @@
+'use strict';
+
 module.exports = function (config, app) {
 
   var articles = require(config.get('root') + '/www/controllers/articles');

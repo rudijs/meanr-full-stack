@@ -1,3 +1,5 @@
+'use strict';
+
 // Articles JSON only API
 
 // Import required modules
