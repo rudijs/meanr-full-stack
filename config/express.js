@@ -1,14 +1,16 @@
+'use strict';
+
 var env = process.env.NODE_ENV = process.env.NODE_ENV || 'development',
   config = require('./config'),
-  // Custom winston logger
+// Custom winston logger
   logger = require('./log'),
   express = require('express'),
   params = require('express-params'),
   redisClient = require('./redis'),
-  redisStore = require('connect-redis')(express),
+  RedisStore = require('connect-redis')(express),
   flash = require('connect-flash'),
-  // Express HTTP access and error logging
-  // Default winston logger for express-winston to use
+// Express HTTP access and error logging
+// Default winston logger for express-winston to use
   winston = require('winston'),
   expressWinston = require('express-winston');
 
@@ -28,7 +30,7 @@ module.exports = function (app, passport) {
 
   // Enable response compression (utilize bandwidth)
   app.use(express.compress({
-    filter: function(req, res) {
+    filter: function (req, res) {
       return (/json|text|javascript|css/).test(res.getHeader('Content-Type'));
     },
     // Levels are specified in a range of 0 to 9, where-as 0 is
@@ -51,7 +53,7 @@ module.exports = function (app, passport) {
       domain: config.get('app').cookieDomain,
       expires: new Date(config.get('cookieExpire'))
     },
-    store: new redisStore({
+    store: new RedisStore({
       secret: config.get('redisSessionSecret'),
       client: redisClient
     })

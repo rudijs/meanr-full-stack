@@ -1,3 +1,5 @@
+'use strict';
+
 var config = require('../../../config/config'),
   logger = require(config.get('root') + '/config/log');
 

@@ -1,3 +1,5 @@
+'use strict';
+
 var logger = require('./log'),
   config = require('./config'),
   mongoose = require('mongoose'),

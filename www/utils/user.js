@@ -1,3 +1,5 @@
+'use strict';
+
 var _ = require('lodash');
 
 // If the user is logged in return a user object with limited properties

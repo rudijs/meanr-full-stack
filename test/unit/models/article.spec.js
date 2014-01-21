@@ -1,3 +1,5 @@
+'use strict';
+
 require('../../../config/mongodb');
 
 var should = require('chai').should(),

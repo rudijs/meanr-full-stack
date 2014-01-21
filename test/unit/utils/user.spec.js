@@ -1,3 +1,5 @@
+'use strict';
+
 var config = require('../../../config/config'),
   should = require('chai').should(),
   expectjs = require('chai').expect,

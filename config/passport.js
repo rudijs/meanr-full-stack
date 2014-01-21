@@ -1,3 +1,5 @@
+'use strict';
+
 var config = require('./config'),
   logger = require(config.get('root') + '/config/log'),
   mongoose = require('mongoose'),
@@ -209,7 +211,7 @@ module.exports = function (passport) {
       clientSecret: config.get('facebook').clientSecret,
       callbackURL: config.get('facebook').callbackURL
     },
-    function(accessToken, refreshToken, profile, done) {
+    function (accessToken, refreshToken, profile, done) {
 
       var email = profile.emails[0].value;
 
