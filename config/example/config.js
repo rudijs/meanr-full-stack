@@ -42,19 +42,19 @@ nconf.defaults({
   facebook: {
     clientID: 'APP_ID',
     clientSecret: 'APP_SECRET',
-    callbackURL: 'http://meanr.local:3000/auth/facebook/callback'
+    callbackURL: 'http://localhost:3000/auth/facebook/callback'
   },
 
   github: {
     clientID: 'APP_ID',
     clientSecret: 'APP_SECRET',
-    callbackURL: 'http://meanr.local:3000/auth/github/callback'
+    callbackURL: 'http://localhost.local:3000/auth/github/callback'
   },
 
   google: {
     clientID: 'APP_ID',
     clientSecret: 'APP_SECRET',
-    callbackURL: 'http://meanr.local:3000/auth/google/callback'
+    callbackURL: 'http://localhost.local:3000/auth/google/callback'
   },
 
   // End-to-End test URLs.
