@@ -1,10 +1,10 @@
 {
   "database": {
     "mongodb": {
-      "uri": "mongodb://192.168.33.10/meanr-test"
+      "uri": "mongodb://localhost/meanr-test"
     },
     "redis": {
-      "ip": "192.168.33.10"
+      "ip": "localhost"
     }
   },
 

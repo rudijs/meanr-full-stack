@@ -91,7 +91,7 @@ Installation:
 Run tests in Chrome
 
     webdriver-manager start
-    grunt protractor
+    grunt e2e
 
 ### Javascript JSHint
 

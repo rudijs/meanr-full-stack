@@ -1,6 +1,10 @@
-## Requirements
+## Requirements (with recommended versions)
 
-See the `Requirements Overview` section in the main repository README for the software requirements
+* [Node.js](http://nodejs.org/) (v0.10.24)
+* [Ruby](http://rvm.io/) (2.1.0p0)
+* [VirtualBox](https://www.virtualbox.org/) (4.3.6)
+* [Vagrant](http://www.vagrantup.com/) (1.4.0)
+* [Git](http://git-scm.com/) and [Git-Flow](http://nvie.com/posts/a-successful-git-branching-model/)
 
 ## Overview
 
@@ -54,18 +58,6 @@ Clone the git repository and cd into it
 
     git clone git@github.com:rudijs/meanr-full-stack.git
     cd meanr-full-stack/
-
-Install Git Flow - this not essential or required, using Git Flow is recommended
-
-    git flow init
-
-Choose all the defaults when prompted above
-
-If you don't install `git flow` checkout the `develop` branch
-
-    git checkout develop
-
-## Application initialization
 
 Install node dependencies based on the `package.json` configuration
 
@@ -171,7 +163,7 @@ We can now start the MEANR app,
 Start the application with `grunt`
 
     cd ../../
-    grunt
+    grunt serve
 
 View the application in Chrome
 
@@ -181,11 +173,7 @@ We can seed the new MEANR database with a test user and some articles.
 
 The fixture data is from the json files in `test/fixtures/db/`
 
-We'll use `Capistrano` and install it with the bundle command
-
-    bundle
-
-We can now seed the database with:
+We'll use a `Capistrano` task to run the database seeding with:
 
     cap local mongodb_seed
 
@@ -225,8 +213,7 @@ Next steps, check out the [Testing](testing.md) documentation and run the test s
     thor devops:bootstrap
     thor devops:cook
     cd ../../
-    grunt
+    grunt serve
     google-chrome http://meanr.local:3000/
-    bundle
     cap local mongodb_seed
 

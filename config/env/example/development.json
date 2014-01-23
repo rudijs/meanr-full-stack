@@ -1,15 +1,15 @@
 {
   "app": {
-    "domain": "meanr.local",
-    "cookie_domain": ".meanr.local"
+    "domain": "localhost",
+    "cookie_domain": "localhost"
   },
 
   "database": {
     "mongodb": {
-      "uri": "mongodb://192.168.33.10/meanr-dev"
+      "uri": "mongodb://localhost/meanr-dev"
     },
     "redis": {
-      "ip": "192.168.33.10"
+      "ip": "localhost"
     }
   },
 
