@@ -1,6 +1,6 @@
 {
   "name": "meanr-full-stack",
-  "version": "0.0.1",
+  "version": "0.1.6",
   "authors": [
     "Your Name <your@email-address.com>"
   ],
@@ -15,9 +15,10 @@
   ],
   "dependencies": {
     "foundation": "~5.0.2",
-    "lodash": "latest",
     "bower-angular-placeholders": "~0.0.2",
+    "lodash": "~2.4.1",
     "restangular": "~1.1.8",
+    "angular": "1.2.9",
     "angular-cookies": "~1.2.4",
     "angular-gettext": "~0.2.0",
     "angular-mocks": "~1.2.4",
@@ -34,5 +35,8 @@
     "lodash": {
       "dist": "lodash.min.js"
     }
+  },
+  "resolutions": {
+    "angular": "1.2.9"
   }
 }

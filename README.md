@@ -1,22 +1,36 @@
 # MEANR Full Stack
 
-Javascript Responsive Web App - MongoDB, Express, AngularJS, Node.js and Redis with Foundation 5 CSS.
+## Client-side
 
-Ruby - DevOps using Chef with Capistrano (v3) for deployment.
+* [AngularJS](http://angularjs.org/)
+* [Foundation 5](http://foundation.zurb.com/)
 
-Node.js testing with Mocha, SinonJS and Chai.
+## Server-side
 
-AngularJS testing with  Karma (Jasmine), Protractor (End-to-End), Sauce Labs (Selenium)
+* [Express](http://expressjs.com/) JSON API
+* [Passport](http://passportjs.org/) authentication middleware
 
-API testing with Supertest (API)
+## Data Storage
 
-Dev Ops testing with ServerSpec and ChefSpec.
+* [MongoDB](http://www.mongodb.org/) - data storage
+* [Redis](http://redis.io/) - session storage
 
-Code Linting with JSHint, Rubocop and Food Critic + Live Reload in development.
+## Testing
 
-Production monitoring - Data Dog, MMS - MongoDB Monitoring Service, Amazon EC2 dashboard.
+* Client-side
+    1. [Karma Test Runner](http://karma-runner.github.io/0.10/index.html) (Jasmine style w/ HTML code coverage reports)
+    2. [Protractor](https://github.com/angular/protractor) end to end tests
+* Server-side
+    1. [Mocha](http://visionmedia.github.io/mocha/) (w/ HTML code coverage reports)
+    2. with [Sinon.JS](http://sinonjs.org/) and [Chai](http://chaijs.com/)
+    3. API tests with [supertest](https://github.com/visionmedia/supertest)
+* Code Linting
+    1. JSHint
 
-Version control with Git Flow.
+## Tools
+
+* [Grunt](http://gruntjs.com/) task runner
+* [Bower](http://bower.io/) front-end package management
 
 [![Build Status](https://travis-ci.org/rudijs/meanr-full-stack.png?branch=master)](https://travis-ci.org/rudijs/meanr-full-stack)
 
@@ -26,100 +40,114 @@ Version control with Git Flow.
 
 Demonstration and starting point of how to develop **and** deloy a MEANR application.
 
-Emphasis on a professional level of development with a broad suite of tests.
+Emphasis on a professional level of development with deploymetn and broad suite of tests.
 
-To help spread the word and improve on the "MEANR Stack with Dev Ops" goodness.
+To help spread the word and improve on the "MEANR Stack with DevOps" goodness.
 
 To learn about and improve on the MEANR Stack.
 
-## Stack
+The sample application is a simple articles CRUD app and comes with unit and end-to-end tests for the client and server code.
 
-MEANR is a boilerplate composition of code, tools, ideas and a workflow for modern web development.
+## (Optional) DevOps and Deployment with Ruby:
 
-Write code locally and then programmatically build and deploy to Development, Staging, QA and finally Production ready servers.
+* [Chef-Solo](http://docs.opscode.com/chef_solo.html)
+* [Capistrano](http://www.capistranorb.com/)
+* [Docker](http://www.docker.io/) containers (non-production only currently)
 
-Test code locally and also in the cloud with Continious Inegration and Sauce Labs Selenium tests.
+## Quick Install
 
-A composition such as this project has many moving parts, this README is a high level overview with links to more installation and usage details.
+* Requirements
+    1. [Node.js](http://nodejs.org/) (recommended v0.10.24)
+    2. [MongoDB](http://www.mongodb.com/)
+    3. [Redis](http://redis.io/)
 
-The sample application is a simple article CRUD app and comes with unit and end-to-end tests for the client and server code.
+You should have a MongoDB and Redis servers running. The default address for these in `config/env/development.json` is set to `localhost`
+
+Install global node dependencies `Grunt` and `Bower`
+
+    npm install -g grunt-cli bower
+
+Clone the git repository and cd into it
+
+    git clone git@github.com:rudijs/meanr-full-stack.git
+    cd meanr-full-stack/
+
+Install node dependencies based on the `package.json` configuration
+
+    npm install
+
+Install front-end dependencies with Bower based on the `bower.json` configuration
+
+    bower install
+
+Copy all `example/*` configuration files into place
+
+    grunt init
+
+Start the server
+
+    grunt serve
+
+Then open a browser and go to:
+
+    http://localhost:3000
+
+## Running the Tests
+
+With MongoDB, Redis and the node MEANR application running you can run most of the tests right away.
+
+Node Tests
+
+    grunt test
+
+AngularJS Karma Unit Tests
+
+    grunt karma
+
+Javascript code linting tests
+
+    grunt jshint
+
+The API tests have a database dependency you'll need to meet before these tests will pass
+
+First add a test user account to Mongodb
+
+    mongoimport -h 127.0.0.1 --db meanr-dev --collection users --file test/fixtures/db/users.json
+
+Run the API tests
+
+    npm test
+
+The Protractor End-to-End test have some dependencies you'll need to meet before these tests will pass
+
+Installation:
+
+    npm install -g protractor
+    webdriver-manager update
+
+Start the Selenium server
+
+    webdriver-manager start
+
+Open a new terminal and run tests in Chrome
+
+    grunt e2e
+
+## Full Install
+
+The full install includes using a Virtual Box (Vagrant) Virtual Machine with a server provisioning and deployment process.
+
+This part uses Ruby software - [Chef-Solo](http://docs.opscode.com/chef_solo.html) for DevOps and [Capistrano](http://www.capistranorb.com/) for deployment.
+
+See the [docs/](https://github.com/rudijs/meanr-full-stack/tree/master/docs) folder for detailed information.
+
+Here is two images which outline the full install process:
 
 ## Workflow
 ![MEANR Flow](https://dl.dropboxusercontent.com/u/7108604/meanr-full-stack-workflow_inkscape.png "MEANR Flow")
 
 ## MEANR Stack Types
 ![MEANR Stack Types](https://dl.dropboxusercontent.com/u/7108604/meanr-full-stack-types_inkscape.png "MEANR Stack Types")
-
-### Requirements Overview - MEANR Full Stack is currently built with:
-
-* [Node.js](http://nodejs.org/) (v0.10.24)
-* [Ruby](http://rvm.io/) (2.1.0p0)
-* [VirtualBox](https://www.virtualbox.org/) (4.3.6)
-* [Vagrant](http://www.vagrantup.com/) (1.4.0)
-* [Git](http://git-scm.com/) and [Git-Flow](http://nvie.com/posts/a-successful-git-branching-model/)
-
-### Development stack:
-
-* [MongoDB](http://www.mongodb.com/)
-* [Express](http://expressjs.com/)
-* [AngularJS](http://angularjs.org/)
-* [Node.js](http://nodejs.org/)
-* [Redis](http://redis.io/)
-
-### Production stack:
-
-* [MongoDB](http://www.mongodb.com/)
-* [Express](http://expressjs.com/)
-* [AngularJS](http://angularjs.org/)
-* [Node.js](http://nodejs.org/)
-* [Redis](http://redis.io/)
-* [Nginx](http://nginx.com/)
-
-### DevOps and Deployment with Ruby:
-
-* [Chef-Solo](http://docs.opscode.com/chef_solo.html)
-* [Capistrano](http://www.capistranorb.com/)
-
-### Workflow tools:
-
-* [Git](http://git-scm.com/) + [Git Flow](http://danielkummer.github.io/git-flow-cheatsheet/)
-* [Grunt](http://gruntjs.com/)
-* [Bower](http://bower.io/)
-
-## Testing Frameworks (integrated with the Grunt.js and rake)
-
-* AngularJS unit tests with HTML code coverage reports by [Karma Test Runner](http://karma-runner.github.io/0.10/index.html)
-* AngualrJS end-to-end tests with [Protractor](https://github.com/angular/protractor) for development
-* AngualrJS end-to-end tests with [Sauce Labs](https://saucelabs.com/) for production
-* [Mocha](http://visionmedia.github.io/mocha/) unit tests with HTML code coverage reports - uses [Sinon.JS](http://sinonjs.org/) and [Chai](http://chaijs.com/)
-* API request tests using [supertest](https://github.com/visionmedia/supertest)
-* [ServerSpec](http://serverspec.org/) RSpec tests for your servers
-* [chefspec](https://github.com/sethvargo/chefspec) for Chef recipes (low code coverage level at this time)
-* Continuous Integration with [Travis CI](https://travis-ci.org/)
-* Automated code review with [Code Climate](https://codeclimate.com/)
-
-## Logging:
-
-* Development mode logging is to file with [Winston](https://github.com/flatiron/winston)
-* Production mode uses [winston-loggly](https://github.com/indexzero/winston-loggly) to logs to [loggly.com](https://www.loggly.com/)
-
-## Monitoring in production deployment:
-
-* [datadog.com](http://www.datadoghq.com/)
-* [MongoDB Management Service (MMS)](https://mms.mongodb.com/)
-
-## Workflow Gist:
-
-* Develop locally (on your workstation) using the Development stack.
-* Use Chef-solo to build development, staging, QA and production servers to deploy to.
-* Use Grunt prepare/build AngularJS application code for deployment (build supporting JS, CSS concatination, minification and versioning)
-* Push code to a remote git repository - defaults are [Git Hub](http://github.com/) and [Bit Bucket](https://bitbucket.org/)
-* Use Capistrano to deploy to a production standard server pulling from a remote git repository.
-* Capistrano's default deployment configuration is for 4 machines. From localhost to a 'dev' server, to a 'staging' server, to a 'QA' server and then to a 'production' server.
-
-## Setup, Installation and Use
-
-* See the [docs/](https://github.com/rudijs/meanr-full-stack/tree/master/docs) folder for detailed information.
 
 ## Credits and Inspired by
 
