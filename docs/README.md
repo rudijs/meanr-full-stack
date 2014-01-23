@@ -1,7 +1,7 @@
 ## Getting Started
 
 * [Configuration](configuration.md)
-* [Installation](installation.md)
+* [Full Installation](full-installation.md)
 * [Testing](testing.md)
 * [Workflow](workflow.md)
 * [Authentication](authentication.md)
