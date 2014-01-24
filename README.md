@@ -1,5 +1,13 @@
 # MEANR Full Stack
 
+MEANR is a boilerplate that provides a starting point for MongoDB, Node.js, Express, AngularJS and Redis based applications.
+
+Optionally you can use a DevOps and deployment strategy using Ruby with Chef-Solo and Capistrano.
+
+Both the MEANR web application and the DevOps/Deployment come with a broad range of test suites.
+
+The sample application is a simple Articles create, read, update and destroy (CRUD) web site.
+
 ## Client-side
 
 * [AngularJS](http://angularjs.org/)
@@ -40,13 +48,11 @@
 
 Demonstration and starting point of how to develop **and** deloy a MEANR application.
 
-Emphasis on a professional level of development with deploymetn and broad suite of tests.
+Emphasis on a professional level of development with deployment and broad suite of tests.
 
 To help spread the word and improve on the "MEANR Stack with DevOps" goodness.
 
 To learn about and improve on the MEANR Stack.
-
-The sample application is a simple articles CRUD app and comes with unit and end-to-end tests for the client and server code.
 
 ## (Optional) DevOps and Deployment with Ruby:
 
@@ -159,6 +165,7 @@ Here is two images which outline the full install process:
 * [ng-book](https://www.ng-book.com/)
 * [Node.js the Right Way: Practical, Server-Side JavaScript That Scales](http://pragprog.com/book/jwnode/node-js-the-right-way)
 * [Chef](http://www.getchef.com/solutions/devops/) and the DevOps 'infrastructre as code' movement
+* [Docker](http://www.docker.io/)
 
 ## License - [The MIT License (MIT)](http://opensource.org/licenses/MIT)
 
