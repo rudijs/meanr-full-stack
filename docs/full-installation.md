@@ -1,6 +1,6 @@
 ## Requirements (with recommended versions)
 
-* [Node.js](http://nodejs.org/) (v0.10.24)
+* [Node.js](http://nodejs.org/) (v0.10.25)
 * [Ruby](http://rvm.io/) (2.1.0p0)
 * [VirtualBox](https://www.virtualbox.org/) (4.3.6)
 * [Vagrant](http://www.vagrantup.com/) (1.4.0)

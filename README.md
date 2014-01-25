@@ -63,7 +63,7 @@ To learn about and improve on the MEANR Stack.
 ## Quick Install
 
 * Requirements
-    1. [Node.js](http://nodejs.org/) (recommended v0.10.24)
+    1. [Node.js](http://nodejs.org/)
     2. [MongoDB](http://www.mongodb.com/)
     3. [Redis](http://redis.io/)
 
