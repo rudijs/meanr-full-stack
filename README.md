@@ -62,6 +62,8 @@ To learn about and improve on the MEANR Stack.
 
 ## Quick Install
 
+A youtube screencast of the following quick install steps is available at [http://youtu.be/WzvgWYE9XnY](http://youtu.be/WzvgWYE9XnY)
+
 * Requirements
     1. [Node.js](http://nodejs.org/)
     2. [MongoDB](http://www.mongodb.com/)
