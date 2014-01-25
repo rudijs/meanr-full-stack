@@ -14,7 +14,7 @@ Once all the requirements and dependencies have been met this is the gist of **l
 
 3. Start the meanr node application with the default Grunt task:
     * `cd meanr-full-stack/`
-    * `grunt`
+    * `grunt serve`
 
 4. View the application using Chrome with the `LiveReload` Chrome extension
     * `http://meanr.local:3000`

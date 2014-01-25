@@ -63,7 +63,7 @@ To learn about and improve on the MEANR Stack.
 ## Quick Install
 
 * Requirements
-    1. [Node.js](http://nodejs.org/) (recommended v0.10.24)
+    1. [Node.js](http://nodejs.org/)
     2. [MongoDB](http://www.mongodb.com/)
     3. [Redis](http://redis.io/)
 
@@ -77,6 +77,10 @@ Clone the git repository and cd into it
 
     git clone git@github.com:rudijs/meanr-full-stack.git
     cd meanr-full-stack/
+
+Optional but good practice to install git flow
+
+    git flow init
 
 Install node dependencies based on the `package.json` configuration
 
