@@ -78,6 +78,10 @@ Clone the git repository and cd into it
     git clone git@github.com:rudijs/meanr-full-stack.git
     cd meanr-full-stack/
 
+Optional but good practice to install git flow
+
+    git flow init
+
 Install node dependencies based on the `package.json` configuration
 
     npm install
