@@ -130,13 +130,22 @@ module.exports = function (app, passport) {
       var errorMsg;
 
       if ('production' === app.get('env')) {
-        errorMsg = 'We\'re sorry, but something went wrong. We\'ve been notified about this issue and we\'ll follow up on this right away.';
+        errorMsg = 'We\'re very sorry, but something went wrong. We\'ve been notified about this issue and we\'ll follow up on this right away.';
       }
       else {
         errorMsg = err.stack;
       }
 
-      res.status(500).render('500.html', { error: errorMsg });
+      // If the request is from AngulaJS respond with JSON else full HTML page
+      if (req.header('X-XSRF-TOKEN')) {
+        res.send(500, { error: errorMsg });
+      }
+      else {
+        res.status(500).render('500.html', {
+          name: config.get('app').name,
+          error: errorMsg
+        });
+      }
 
       // Fix JSHint's warning of next not being used by defining it
       next = next;
@@ -157,7 +166,7 @@ module.exports = function (app, passport) {
     // res.redirect('/#' + req.originalUrl);
 
     // 301 response
-    res.writeHead(301, {'Location': '/#' + req.originalUrl});
+    res.writeHead(301, {'Location': '/#!' + req.originalUrl});
     res.end();
 
   });

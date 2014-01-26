@@ -29,7 +29,7 @@ describe('<Unit Test>', function () {
 
         should.exist(templateVars);
         templateVars.hostname.should.equal('meanr.local');
-        templateVars.title.should.equal('MEANR');
+        templateVars.title.should.equal('MEANR Full Stack');
         templateVars.user.should.equal('null');
 
         done();
@@ -66,7 +66,7 @@ describe('<Unit Test>', function () {
 
         should.exist(templateVars);
         templateVars.hostname.should.equal('meanr.local');
-        templateVars.title.should.equal('MEANR');
+        templateVars.title.should.equal('MEANR Full Stack');
         templateVars.user.should.equal('{"email":"example@email.com","_id":"abc123","name":"Net Citizen"}');
 
         done();

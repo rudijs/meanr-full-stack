@@ -1,44 +1,28 @@
 <!doctype html>
-<html class="no-js" lang="en">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>MEANR Full Stack</title>
-    <link rel="stylesheet" href="/bower_components/foundation/css/foundation.css" />
-    <script src="/bower_components/foundation/js/vendor/custom.modernizr.js"></script>
+    <meta charset="utf-8"/>
+    <title><%- name %></title>
+    <style>
+        body {
+            background-color: rgba(190, 190, 190, 0.38);
+        }
+        h1, h3 {
+            font-family: "Courier New", Courier, monospace
+        }
+        p {
+            font-family: Arial, Helvetica, sans-serif
+        }
+    </style>
 </head>
 <body>
 
-<div class="row">
-    <div class="large-12 columns">
-        <h1>MEANR Full Stack</h1>
-    </div>
-</div>
+<h1><%- name %></h1>
 
-<div class="row">
-    <div class="large-12 columns">
-        <div class="panel">
-            <h3>Oops! Something blew up!</h3>
-            <p style="white-space: pre-line">
-                <%- error %>
-            </p>
+<h3>Oops! Something blew up!</h3>
 
-            <div class="row">
-                <div class="large-6 medium-6 columns">
-                    <p><a href="http://foundation.zurb.com/docs">MEANR Full Stack Documentation</a><br />Detailed information on installation and usage..</p>
-                </div>
-                <div class="large-6 medium-6 columns">
-                    <p><a href="https://github.com/rudijs/meanr-full-stack">MEANR Full Stack on Github</a><br />Latest code, issue reports, feature requests and more.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+<p style="white-space: pre-line">
+    <%- error %>
+</p>
 
-<script src="/bower_components/foundation/js/vendor/jquery.js"></script>
-<script src="/bower_components/foundation/js/foundation.min.js"></script>
-<script>
-    $(document).foundation();
-</script>
 </body>
 </html>

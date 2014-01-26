@@ -22,6 +22,10 @@
           templateUrl: 'views/404.html'
         }).
 
+        when('/error', {
+          templateUrl: 'error.html'
+        }).
+
         when('/signin', {
           templateUrl: 'views/users/signin.html',
           controller: 'UsersCtrl'

@@ -18,7 +18,7 @@
       });
     });
 
-// Create application services module and define the dependencies
+  // Create application services module and define the dependencies
   angular.module('meanr.services', [
     'meanr.service.global',
     'meanr.service.go'
@@ -31,5 +31,23 @@
       RestangularProvider.setBaseUrl('/api/v1');
 
     });
+
+  // Any server-side 500 response errors locate to the /error view
+  angular.module('meanr')
+    .factory('meanrHTTPIntercetor', function ($q, $location) {
+      return {
+        'responseError': function (rejection) {
+          if (rejection.status === 500) {
+            $location.path('/error');
+          }
+          return $q.reject(rejection);
+        }
+      };
+    });
+
+  angular.module('meanr')
+    .config(['$httpProvider', function ($httpProvider) {
+      $httpProvider.interceptors.push('meanrHTTPIntercetor');
+    }]);
 
 })();
