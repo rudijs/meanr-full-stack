@@ -32,7 +32,7 @@ nconf.defaults({
   redisSessionSecret: 'eVCbCFxUUG1kq3x5U9tuzUOkg',
 
   app: {
-    name: 'MEANR'
+    name: 'MEANR Full Stack'
   },
 
   logMaxFileSize: 1048576,

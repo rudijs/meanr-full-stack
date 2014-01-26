@@ -37,7 +37,7 @@ describe('<Unit Test>', function () {
             return done(err);
           }
 
-          expectjs(res.text).to.match(/We're\ sorry,\ but\ something\ went\ wrong\.\ We've\ been\ notified\ about\ this\ issue\ and\ we'll\ follow\ up\ on\ this\ right\ away\./);
+          expectjs(res.text).to.match(/We're\ very\ sorry,\ but\ something\ went\ wrong\.\ We've\ been\ notified\ about\ this\ issue\ and\ we'll\ follow\ up\ on\ this\ right\ away\./);
 
           done();
         });
@@ -55,7 +55,7 @@ describe('<Unit Test>', function () {
           }
 
           // 301 permanent redirect to angularjs which will handle the 404 page if the route doesn't exist in AngularJS
-          expectjs(res.headers.location).to.equal('/#/articles');
+          expectjs(res.headers.location).to.equal('/#!/articles');
 
           done();
         });
