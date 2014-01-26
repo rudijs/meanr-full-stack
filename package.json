@@ -1,6 +1,6 @@
 {
   "name": "meanr-full-stack",
-  "version": "0.1.10",
+  "version": "0.1.11",
   "private": true,
   "scripts": {
     "test": "./node_modules/grunt-mocha-test/node_modules/mocha/bin/_mocha --reporter spec --no-colors test/api/*.js"
