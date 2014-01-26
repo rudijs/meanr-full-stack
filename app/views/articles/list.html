@@ -29,6 +29,17 @@
             </tbody>
 
         </table>
+
+        <ul>
+            <li ng-repeat="item in searchPaginator.currentPageItems">
+                {{item.title}}
+            </li>
+        </ul>
+
+        <button ng-disabled="!searchPaginator.hasPrevious()" ng-click="searchPaginator.previous()" translate>Previous</button>
+        {{ searchPaginator.getCurrentPage() }} / {{ searchPaginator.getTotalPages() }}
+        <button ng-disabled="!searchPaginator.hasNext()" ng-click="searchPaginator.next()" translate>Next</button>
+
     </div>
 
     <div class="small-4 columns">

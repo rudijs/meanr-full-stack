@@ -21,7 +21,8 @@
   // Create application services module and define the dependencies
   angular.module('meanr.services', [
     'meanr.service.global',
-    'meanr.service.go'
+    'meanr.service.go',
+    'meanr.service.paginator'
   ]);
 
   angular.module('meanr')
