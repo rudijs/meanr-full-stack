@@ -46,7 +46,7 @@ describe('Controller', function () {
       $httpBackend.flush();
 
       // test scope value
-      expect(scope.articles).toEqualData([
+      expect(scope.articlesPaginator.currentPageItems).toEqualData([
         {from: 'A', to: 'B'}
       ]);
 

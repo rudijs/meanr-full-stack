@@ -13,7 +13,7 @@
 
             <tbody>
 
-            <tr data-ng-hide="!articles || articles.length">
+            <tr data-ng-show="articlesPaginator.getTotalPages() == 0">
                 <td colspan="2">
                     <p translate>There are no articles yet.</p>
 
@@ -21,24 +21,26 @@
                 </td>
             </tr>
 
-            <tr ng-repeat="article in articles" ng-click="go.to('/articles', article._id, 'back')">
+            <tr ng-repeat="article in articlesPaginator.currentPageItems" ng-click="go.to('/articles', article._id, 'back')">
                 <td>{{ article.title }}</td>
                 <td nowrap="nowrap"> {{ article.created_at | date:'fullDate' }}</td>
             </tr>
 
+
+
             </tbody>
 
+            <tfoot>
+            <tr data-ng-hide="articlesPaginator.getTotalPages() < 2">
+                <td colspan="2">
+                    <button class="button round" ng-disabled="!articlesPaginator.hasPrevious()" ng-click="articlesPaginator.previous()" translate>Previous</button>
+                    {{ articlesPaginator.getCurrentPage() }} / {{ articlesPaginator.getTotalPages() }}
+                    <button class="button round" ng-disabled="!articlesPaginator.hasNext()" ng-click="articlesPaginator.next()" translate>Next</button>
+                </td>
+            </tr>
+            </tfoot>
+
         </table>
-
-        <ul>
-            <li ng-repeat="item in searchPaginator.currentPageItems">
-                {{item.title}}
-            </li>
-        </ul>
-
-        <button ng-disabled="!searchPaginator.hasPrevious()" ng-click="searchPaginator.previous()" translate>Previous</button>
-        {{ searchPaginator.getCurrentPage() }} / {{ searchPaginator.getTotalPages() }}
-        <button ng-disabled="!searchPaginator.hasNext()" ng-click="searchPaginator.next()" translate>Next</button>
 
     </div>
 

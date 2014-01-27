@@ -13,7 +13,7 @@ describe('Paginator Service', function () {
   };
 
   beforeEach(inject(function (Paginator) {
-    paginator = new Paginator(fetchFn, 3);
+    paginator = new Paginator(fetchFn, 3, items.length);
   }));
 
   it('should show items on the first page', function () {
@@ -46,6 +46,18 @@ describe('Paginator Service', function () {
   it('should not go back from first page', function () {
     paginator.previous();
     expect(paginator.currentPageItems).toEqual([1, 2, 3]);
+  });
+
+  it('should return the current page number', function () {
+    expect(paginator.getCurrentPage()).toEqual(1);
+    paginator.next();
+    expect(paginator.getCurrentPage()).toEqual(2);
+    paginator.previous();
+    expect(paginator.getCurrentPage()).toEqual(1);
+  });
+
+  it('should return the total number of pages', function () {
+    expect(paginator.getTotalPages()).toEqual(2);
   });
 
 });

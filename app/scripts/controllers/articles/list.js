@@ -9,23 +9,22 @@
 
       $scope.go = Go;
 
+      // items will be an array to store fetched articles
       var items;
 
-      var listArticles = function () {
-        Restangular.one('articles').get().then(function (articles) {
-          $scope.articles = _.toArray(articles);
-
-          items = _.toArray(articles);
-          $scope.searchPaginator = new Paginator(fetchFunction, 3, items.length);
-
-        });
-      };
-
+      // paginator will slice from items and paginate through them
       var fetchFunction = function (offset, limit, callback) {
         callback(items.slice(offset, offset + limit));
       };
 
+      // fetch articles, add to items array, paginate items array
+      var listArticles = function () {
+        Restangular.one('articles').get().then(function (articles) {
+          items = _.toArray(articles);
+          $scope.articlesPaginator = new Paginator(fetchFunction, 3, items.length);
 
+        });
+      };
 
       listArticles();
 
