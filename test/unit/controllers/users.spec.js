@@ -49,7 +49,7 @@ describe('<Unit Test>', function () {
       res.redirect = function (url) {
 
         should.exist(url);
-        url.should.equal('/#/signin');
+        url.should.equal('/#!/signin');
 
         done();
       };
@@ -152,7 +152,7 @@ describe('<Unit Test>', function () {
 
         // tests
         should.exist(url);
-        url.should.equal('/#/signup?errors=Please fix these errors:%2C*%20Name%20cannot%20be%20blank%2C*%20Email%20cannot%20be%20blank');
+        url.should.equal('/#!/signup?errors=Please fix these errors:%2C*%20Name%20cannot%20be%20blank%2C*%20Email%20cannot%20be%20blank');
 
         done();
 
@@ -183,7 +183,7 @@ describe('<Unit Test>', function () {
 
         // tests
         should.exist(url);
-        url.should.equal('/#/signup?errors=Please fix these errors:%2CThis%20email%20address%20already%20exists');
+        url.should.equal('/#!/signup?errors=Please fix these errors:%2CThis%20email%20address%20already%20exists');
 
         done();
 

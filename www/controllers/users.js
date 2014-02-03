@@ -10,7 +10,7 @@ var config = require('../../config/config'),
  * Sigin via AngularJS view
  */
 exports.signin = function (req, res) {
-  res.redirect('/#/signin');
+  res.redirect('/#!/signin');
 };
 
 /**
@@ -71,7 +71,7 @@ exports.create = function (req, res) {
       }
 
       logger.error('LocalStrategy create save error: ' + err.toString());
-      return res.redirect('/#/signup?errors=Please fix these errors:' + encodeURIComponent(errorMessage));
+      return res.redirect('/#!/signup?errors=Please fix these errors:' + encodeURIComponent(errorMessage));
     }
 
     logger.info(['New User:', user.email].join(' '));
