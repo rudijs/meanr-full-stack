@@ -2,7 +2,7 @@
 <project name="ridesharemarket.com" default="main" basedir=".">
 
     <property name="mongodb.status.file" value="/tmp/mongodb-ci_status.txt"/>
-    <property name="node.path" value="~/node-v0.10.25-linux-x64/bin"/>
+    <property name="node.path" value="/media/truecrypt2/projects/jenkins/node-v0.10.25-linux-x64/bin"/>
 
     <!-- Provision and check service dependencies -->
 
