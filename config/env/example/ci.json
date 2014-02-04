@@ -1,18 +1,19 @@
 {
   "app": {
-    "domain": "meanr.local",
-    "cookie_domain": ".meanr.local"
+    "domain": "meanr.local"
   },
+
+  "port": "3001",
 
   "database": {
     "mongodb": {
       "uri": "mongodb://127.0.0.1",
-      "port": "27017",
+      "port": 27018,
       "dbname": "meanr-test"
     },
     "redis": {
       "ip": "127.0.0.1",
-      "port": 6379
+      "port": 6380
     }
   },
 

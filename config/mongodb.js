@@ -7,6 +7,8 @@ var logger = require('./log'),
 
 // Build the connection string
 var dbURI = config.get('database').mongodb.uri;
+var dbPort = config.get('database').mongodb.port;
+var dbName = config.get('database').mongodb.dbname;
 
 // Mongoose connection events
 
@@ -50,7 +52,10 @@ process.on('SIGINT', function () {
 });
 
 // Create the database connection
-mongoose.connect(dbURI, {server: {auto_reconnect: true}});
+mongoose.connect(
+  dbURI + ':' + dbPort + '/' + dbName,
+  {server: {auto_reconnect: true}}
+);
 
 // Bootstrap models
 var requireModels = requireWalk(config.get('root') + '/www/models');

@@ -4,7 +4,10 @@ var config = require('./config'),
   logger = require('./log'),
   redis = require('redis');
 
-var redisClient = redis.createClient(null, config.get('database').redis.ip);
+var redisClient = redis.createClient(
+  config.get('database').redis.port,
+  config.get('database').redis.ip
+);
 
 redisClient
   .on('ready', function () {

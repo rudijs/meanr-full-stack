@@ -243,7 +243,8 @@ module.exports = function (grunt) {
               'development.json',
               'production.json',
               'test.json',
-              'travis.json'
+              'travis.json',
+              'ci.json'
             ]
           },
           {
@@ -430,6 +431,9 @@ module.exports = function (grunt) {
       travis: {
         NODE_ENV: 'travis'
       },
+      ci: {
+        NODE_ENV: 'ci'
+      },
       development: {
         NODE_ENV: 'development'
       },
@@ -496,6 +500,7 @@ module.exports = function (grunt) {
 
   grunt.registerTask('test', ['env:test', 'mochaTest']);
   grunt.registerTask('test-travis', ['env:travis', 'mochaTest']);
+  grunt.registerTask('test-ci', ['env:ci', 'mochaTest']);
 
   grunt.registerTask('e2e', ['protractor']);
   grunt.registerTask('e2e-development', ['env:development', 'protractor']);

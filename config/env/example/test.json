@@ -1,10 +1,19 @@
 {
+  "app": {
+    "domain": "localhost"
+  },
+
+  "port": "3001",
+
   "database": {
     "mongodb": {
-      "uri": "mongodb://localhost/meanr-test"
+      "uri": "mongodb://127.0.0.1",
+      "port": "27017",
+      "dbname": "meanr-test"
     },
     "redis": {
-      "ip": "localhost"
+      "ip": "127.0.0.1",
+      "port": 6379
     }
   },
 
