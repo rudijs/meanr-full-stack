@@ -1,22 +1,19 @@
 <?xml version="1.0"?>
-<project name="ridesharemarket.com" default="main" basedir=".">
+<project name="MEANR Full Stack" default="main" basedir=".">
 
-    <property environment="env"/>
     <property name="mongodb.status.file" value="/tmp/mongodb-ci_status.txt"/>
     <property name="node.path" value="/media/truecrypt2/projects/jenkins/node-v0.10.25-linux-x64/bin"/>
 
     <!-- Check node and install node packages -->
 
     <target name="check-node">
-        <exec executable="node" failonerror="true">
-            <env key="PATH" value="${node.path}:${env.PATH}"/>
+        <exec executable="${node.path}/node" failonerror="true">
             <arg value="-v"/>
         </exec>
     </target>
 
     <target name="npm-global" depends="check-node">
-        <exec executable="npm" failonerror="true">
-            <env key="PATH" value="${node.path}:${env.PATH}"/>
+        <exec executable="${node.path}/npm" failonerror="true">
             <arg value="install"/>
             <arg value="-g"/>
             <arg value="grunt-cli"/>
@@ -25,15 +22,14 @@
     </target>
 
     <target name="npm-local" depends="npm-global">
-        <exec executable="npm" failonerror="true">
-            <env key="PATH" value="${node.path}:${env.PATH}"/>
+        <exec executable="${node.path}/npm" failonerror="true">
             <arg value="install"/>
         </exec>
     </target>
 
     <target name="bower" depends="npm-local">
-        <exec executable="bower" failonerror="true">
-            <env key="PATH" value="${node.path}:${env.PATH}"/>
+        <exec executable="${node.path}/bower" failonerror="true">
+            <env key="PATH" value="${node.path}:${env.path}"/>
             <arg value="install"/>
         </exec>
     </target>
@@ -41,8 +37,8 @@
     <!-- Initialize application configs -->
 
     <target name="grunt-init" depends="bower">
-        <exec executable="grunt" failonerror="true">
-            <env key="PATH" value="${node.path}:${env.PATH}"/>
+        <exec executable="${node.path}/grunt" failonerror="true">
+            <env key="PATH" value="${node.path}:${env.path}"/>
             <arg value="init"/>
         </exec>
     </target>
@@ -96,8 +92,7 @@
 
             <sequential>
 
-                <exec executable="node" output="${mongodb.status.file}" failonerror="true">
-                    <env key="PATH" value="${node.path}:${env.PATH}"/>
+                <exec executable="${node.path}/node" output="${mongodb.status.file}" failonerror="true">
                     <arg value="test/util/connect.js"/>
                 </exec>
 
@@ -129,29 +124,28 @@
     <!-- Start testing actions -->
 
     <target name="jshint" depends="test-mongodb-connect">
-        <exec executable="grunt" failonerror="true">
-            <env key="PATH" value="${node.path}:${env.PATH}"/>
+        <exec executable="${node.path}/grunt" failonerror="true">
+            <env key="PATH" value="${node.path}:${env.path}"/>
             <arg value="jshint"/>
         </exec>
     </target>
 
     <target name="test" depends="jshint">
-        <exec executable="grunt" failonerror="true">
-            <env key="PATH" value="${node.path}:${env.PATH}"/>
+        <exec executable="${node.path}/grunt" failonerror="true">
+            <env key="PATH" value="${node.path}:${env.path}"/>
             <arg value="test-ci"/>
         </exec>
     </target>
 
     <target name="karma" depends="test">
-        <exec executable="grunt" failonerror="true">
-            <env key="PATH" value="${node.path}:${env.PATH}"/>
+        <exec executable="${node.path}/grunt" failonerror="true">
+            <env key="PATH" value="${node.path}:${env.path}"/>
             <arg value="karma:continuous"/>
         </exec>
     </target>
 
     <target name="app-start" depends="karma">
-        <exec executable="node" spawn="true">
-            <env key="PATH" value="${node.path}:${env.PATH}"/>
+        <exec executable="${node.path}/node" spawn="true">
             <env key="NODE_ENV" value="ci"/>
             <arg value="app.js"/>
         </exec>
@@ -170,16 +164,14 @@
     </target>
 
     <target name="app-seed" depends="test-node-app-connect">
-        <exec executable="node" failonerror="true">
-            <env key="PATH" value="${node.path}:${env.PATH}"/>
+        <exec executable="${node.path}/node" failonerror="true">
             <env key="NODE_ENV" value="ci"/>
             <arg value="test/util/seed.js"/>
         </exec>
     </target>
 
     <target name="api-test" depends="app-seed">
-        <exec executable="npm" failonerror="true">
-            <env key="PATH" value="${node.path}:${env.PATH}"/>
+        <exec executable="${node.path}/npm" failonerror="true">
             <env key="NODE_ENV" value="ci"/>
             <arg value="test"/>
         </exec>
