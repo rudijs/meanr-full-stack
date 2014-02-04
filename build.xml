@@ -8,13 +8,15 @@
     <!-- Check node and install node packages -->
 
     <target name="check-node">
-        <exec executable="${node.path}/node" failonerror="true">
+        <exec executable="node" failonerror="true">
+            <env key="PATH" value="${node.path}:${env.PATH}"/>
             <arg value="-v"/>
         </exec>
     </target>
 
     <target name="npm-global" depends="check-node">
-        <exec executable="${node.path}/npm" failonerror="true">
+        <exec executable="npm" failonerror="true">
+            <env key="PATH" value="${node.path}:${env.PATH}"/>
             <arg value="install"/>
             <arg value="-g"/>
             <arg value="grunt-cli"/>
@@ -23,13 +25,14 @@
     </target>
 
     <target name="npm-local" depends="npm-global">
-        <exec executable="${node.path}/npm" failonerror="true">
+        <exec executable="npm" failonerror="true">
+            <env key="PATH" value="${node.path}:${env.PATH}"/>
             <arg value="install"/>
         </exec>
     </target>
 
     <target name="bower" depends="npm-local">
-        <exec executable="${node.path}/bower" failonerror="true">
+        <exec executable="bower" failonerror="true">
             <env key="PATH" value="${node.path}:${env.PATH}"/>
             <arg value="install"/>
         </exec>
@@ -38,7 +41,8 @@
     <!-- Initialize application configs -->
 
     <target name="grunt-init" depends="bower">
-        <exec executable="${node.path}/grunt" failonerror="true">
+        <exec executable="grunt" failonerror="true">
+            <env key="PATH" value="${node.path}:${env.PATH}"/>
             <arg value="init"/>
         </exec>
     </target>
@@ -92,7 +96,8 @@
 
             <sequential>
 
-                <exec executable="${node.path}/node" output="${mongodb.status.file}" failonerror="true">
+                <exec executable="node" output="${mongodb.status.file}" failonerror="true">
+                    <env key="PATH" value="${node.path}:${env.PATH}"/>
                     <arg value="test/util/connect.js"/>
                 </exec>
 
@@ -124,25 +129,29 @@
     <!-- Start testing actions -->
 
     <target name="jshint" depends="test-mongodb-connect">
-        <exec executable="${node.path}/grunt" failonerror="true">
+        <exec executable="grunt" failonerror="true">
+            <env key="PATH" value="${node.path}:${env.PATH}"/>
             <arg value="jshint"/>
         </exec>
     </target>
 
     <target name="test" depends="jshint">
-        <exec executable="${node.path}/grunt" failonerror="true">
+        <exec executable="grunt" failonerror="true">
+            <env key="PATH" value="${node.path}:${env.PATH}"/>
             <arg value="test-ci"/>
         </exec>
     </target>
 
     <target name="karma" depends="test">
-        <exec executable="${node.path}/grunt" failonerror="true">
+        <exec executable="grunt" failonerror="true">
+            <env key="PATH" value="${node.path}:${env.PATH}"/>
             <arg value="karma:continuous"/>
         </exec>
     </target>
 
     <target name="app-start" depends="karma">
-        <exec executable="${node.path}/node" spawn="true">
+        <exec executable="node" spawn="true">
+            <env key="PATH" value="${node.path}:${env.PATH}"/>
             <env key="NODE_ENV" value="ci"/>
             <arg value="app.js"/>
         </exec>
@@ -161,14 +170,16 @@
     </target>
 
     <target name="app-seed" depends="test-node-app-connect">
-        <exec executable="${node.path}/node" failonerror="true">
+        <exec executable="node" failonerror="true">
+            <env key="PATH" value="${node.path}:${env.PATH}"/>
             <env key="NODE_ENV" value="ci"/>
             <arg value="test/util/seed.js"/>
         </exec>
     </target>
 
     <target name="api-test" depends="app-seed">
-        <exec executable="${node.path}/npm" failonerror="true">
+        <exec executable="npm" failonerror="true">
+            <env key="PATH" value="${node.path}:${env.PATH}"/>
             <env key="NODE_ENV" value="ci"/>
             <arg value="test"/>
         </exec>
@@ -179,7 +190,7 @@
     <target name="app-stop" depends="api-test">
         <exec executable="pkill" failonerror="true">
             <arg value="-u"/>
-            <arg value="rudi"/>
+            <arg value="jenkins"/>
             <arg value="node"/>
         </exec>
         <echo message="Stop app.js"/>
