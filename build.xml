@@ -2,11 +2,12 @@
 <project name="ridesharemarket.com" default="main" basedir=".">
 
     <property name="mongodb.status.file" value="/tmp/mongodb-ci_status.txt"/>
+    <property name="node.path" value="~/node-v0.10.25-linux-x64/bin"/>
 
     <!-- Provision and check service dependencies -->
 
     <target name="check-node">
-        <exec executable="node" failonerror="true">
+        <exec executable="${node.path}/node" failonerror="true">
             <arg value="-v"/>
         </exec>
     </target>
@@ -58,7 +59,7 @@
 
             <sequential>
 
-                <exec executable="node" output="${mongodb.status.file}" failonerror="true">
+                <exec executable="${node.path}/node" output="${mongodb.status.file}" failonerror="true">
                     <arg value="test/util/connect.js"/>
                 </exec>
 
@@ -90,7 +91,7 @@
     <!-- Start testing actions -->
 
     <target name="npm-global" depends="test-mongodb-connect">
-        <exec executable="npm" failonerror="true">
+        <exec executable="${node.path}/npm" failonerror="true">
             <arg value="install"/>
             <arg value="-g"/>
             <arg value="grunt-cli"/>
@@ -99,43 +100,43 @@
     </target>
 
     <target name="npm-local" depends="npm-global">
-        <exec executable="npm" failonerror="true">
+        <exec executable="${node.path}/npm" failonerror="true">
             <arg value="install"/>
         </exec>
     </target>
 
     <target name="bower" depends="npm-local">
-        <exec executable="bower" failonerror="true">
+        <exec executable="${node.path}/bower" failonerror="true">
             <arg value="install"/>
         </exec>
     </target>
 
     <target name="grunt-init" depends="bower">
-        <exec executable="grunt" failonerror="true">
+        <exec executable="${node.path}/grunt" failonerror="true">
             <arg value="init"/>
         </exec>
     </target>
 
     <target name="jshint" depends="app-start">
-        <exec executable="grunt" failonerror="true">
+        <exec executable="${node.path}/grunt" failonerror="true">
             <arg value="jshint"/>
         </exec>
     </target>
 
     <target name="test" depends="grunt-init">
-        <exec executable="grunt" failonerror="true">
+        <exec executable="${node.path}/grunt" failonerror="true">
             <arg value="test-ci"/>
         </exec>
     </target>
 
     <target name="karma" depends="test">
-        <exec executable="grunt" failonerror="true">
+        <exec executable="${node.path}/grunt" failonerror="true">
             <arg value="karma:continuous"/>
         </exec>
     </target>
 
     <target name="app-start" depends="karma">
-        <exec executable="node" spawn="true">
+        <exec executable="${node.path}/node" spawn="true">
             <env key="NODE_ENV" value="ci"/>
             <arg value="app.js"/>
         </exec>
@@ -154,14 +155,14 @@
     </target>
 
     <target name="app-seed" depends="test-node-app-connect">
-        <exec executable="node" failonerror="true">
+        <exec executable="${node.path}/node" failonerror="true">
             <env key="NODE_ENV" value="ci"/>
             <arg value="test/util/seed.js"/>
         </exec>
     </target>
 
     <target name="api-test" depends="app-seed">
-        <exec executable="npm" failonerror="true">
+        <exec executable="${node.path}/npm" failonerror="true">
             <env key="NODE_ENV" value="ci"/>
             <arg value="test"/>
         </exec>
