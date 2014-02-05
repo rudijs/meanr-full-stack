@@ -6,10 +6,13 @@
 
   "database": {
     "mongodb": {
-      "uri": "mongodb://localhost/meanr-dev"
+      "uri": "mongodb://127.0.0.1",
+      "port": 27017,
+      "dbname": "meanr-dev"
     },
     "redis": {
-      "ip": "localhost"
+      "ip": "127.0.0.1",
+      "port": 6379
     }
   },
 

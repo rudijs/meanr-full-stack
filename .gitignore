@@ -14,6 +14,7 @@ config/env/development.json
 config/env/production.json
 config/env/test.json
 config/env/travis.json
+config/env/ci.json
 
 chef/.bundle/
 chef/.vagrant/

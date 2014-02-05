@@ -1,0 +1,226 @@
+<?xml version="1.0"?>
+<project name="MEANR Full Stack" default="main" basedir=".">
+
+    <property environment="env"/>
+    <property name="mongodb.status.file" value="/tmp/mongodb-ci_status.txt"/>
+    <property name="node.path" value="/media/truecrypt2/projects/jenkins/node-v0.10.25-linux-x64/bin"/>
+
+    <!-- Check node and install node packages -->
+
+    <target name="check-node">
+        <exec executable="${node.path}/node" failonerror="true">
+            <arg value="-v"/>
+        </exec>
+    </target>
+
+    <target name="npm-global" depends="check-node">
+        <exec executable="${node.path}/npm" failonerror="true">
+            <arg value="install"/>
+            <arg value="-g"/>
+            <arg value="grunt-cli"/>
+            <arg value="bower"/>
+        </exec>
+    </target>
+
+    <target name="npm-local" depends="npm-global">
+        <exec executable="${node.path}/npm" failonerror="true">
+            <arg value="install"/>
+        </exec>
+    </target>
+
+    <target name="bower" depends="npm-local">
+        <exec executable="${node.path}/bower" failonerror="true">
+            <env key="PATH" value="${node.path}:${env.PATH}"/>
+            <arg value="install"/>
+        </exec>
+    </target>
+
+    <!-- Initialize application configs -->
+
+    <target name="grunt-init" depends="bower">
+        <exec executable="${node.path}/grunt" failonerror="true">
+            <env key="PATH" value="${node.path}:${env.PATH}"/>
+            <arg value="init"/>
+        </exec>
+    </target>
+
+    <!-- Provision and check service dependencies -->
+
+    <target name="start-redis-container" depends="grunt-init">
+        <exec executable="sudo" failonerror="true">
+            <arg value="docker"/>
+            <arg value="run"/>
+            <arg value="-d"/>
+            <arg value="-p"/>
+            <arg value="6380:6379"/>
+            <arg value="-name"/>
+            <arg value="redis-ci"/>
+            <arg value="rudijs/redis"/>
+        </exec>
+        <echo message="Sleep for 5 seconds to allow the new Redis start"/>
+        <sleep seconds="5"/>
+    </target>
+
+    <target name="test-redis-connect" depends="start-redis-container">
+        <retry retrycount="60" retrydelay="1000">
+            <fail message="Redis connection failure">
+                <condition>
+                    <not>
+                        <socket server="127.0.0.1" port="6380"/>
+                    </not>
+                </condition>
+            </fail>
+        </retry>
+    </target>
+
+    <target name="start-mongodb-container" depends="test-redis-connect">
+        <exec executable="sudo" failonerror="true">
+            <arg value="docker"/>
+            <arg value="run"/>
+            <arg value="-d"/>
+            <arg value="-p"/>
+            <arg value="27018:27017"/>
+            <arg value="-name"/>
+            <arg value="mongodb-ci"/>
+            <arg value="rudijs/mongodb-ci"/>
+        </exec>
+        <echo message="Sleep for 60 seconds to allow the new MongoDB instance to pre-allocate 3GBs of database filesystem space"/>
+        <sleep seconds="60"/>
+    </target>
+
+    <target name="test-mongodb-connect" depends="start-mongodb-container">
+        <retry retrycount="120" retrydelay="1000">
+
+            <sequential>
+
+                <exec executable="${node.path}/node" output="${mongodb.status.file}" failonerror="true">
+                    <arg value="test/util/connect.js"/>
+                </exec>
+
+                <fail message="MongoDB connection failure">
+                    <condition>
+                        <resourcecontains resource="${mongodb.status.file}" substring="MongoDB connection fail"/>
+                    </condition>
+                </fail>
+
+                <!--
+                <fail message="MongoDB connection failure">
+                    <condition>
+                        <not>
+                            <socket server="127.0.0.1" port="27017"/>
+                        </not>
+                    </condition>
+                </fail>
+                -->
+
+            </sequential>
+
+
+        </retry>
+
+        <delete file="${mongodb.status.file}"/>
+
+    </target>
+
+    <!-- Start testing actions -->
+
+    <target name="jshint" depends="test-mongodb-connect">
+        <exec executable="${node.path}/grunt" failonerror="true">
+            <env key="PATH" value="${node.path}:${env.PATH}"/>
+            <arg value="jshint"/>
+        </exec>
+    </target>
+
+    <target name="test" depends="jshint">
+        <exec executable="${node.path}/grunt" failonerror="true">
+            <env key="PATH" value="${node.path}:${env.PATH}"/>
+            <arg value="test-ci"/>
+        </exec>
+    </target>
+
+    <target name="karma" depends="test">
+        <exec executable="${node.path}/grunt" failonerror="true">
+            <env key="PATH" value="${node.path}:${env.PATH}"/>
+            <arg value="karma:continuous"/>
+        </exec>
+    </target>
+
+    <target name="app-start" depends="karma">
+        <exec executable="${node.path}/node" spawn="true">
+            <env key="NODE_ENV" value="ci"/>
+            <arg value="app.js"/>
+        </exec>
+    </target>
+
+    <target name="test-node-app-connect" depends="app-start">
+        <retry retrycount="60" retrydelay="1000">
+            <fail message="Node app connection failure">
+                <condition>
+                    <not>
+                        <socket server="127.0.0.1" port="3001"/>
+                    </not>
+                </condition>
+            </fail>
+        </retry>
+    </target>
+
+    <target name="app-seed" depends="test-node-app-connect">
+        <exec executable="${node.path}/node" failonerror="true">
+            <env key="NODE_ENV" value="ci"/>
+            <arg value="test/util/seed.js"/>
+        </exec>
+    </target>
+
+    <target name="api-test" depends="app-seed">
+        <exec executable="${node.path}/npm" failonerror="true">
+            <env key="NODE_ENV" value="ci"/>
+            <arg value="test"/>
+        </exec>
+    </target>
+
+    <!-- Clean up provisioned services -->
+
+    <target name="app-stop" depends="api-test">
+        <exec executable="pkill" failonerror="true">
+            <arg value="-u"/>
+            <arg value="jenkins"/>
+            <arg value="node"/>
+        </exec>
+        <echo message="Stop app.js"/>
+    </target>
+
+    <target name="stop-redis-container" depends="app-stop">
+        <exec executable="sudo" failonerror="true">
+            <arg value="docker"/>
+            <arg value="stop"/>
+            <arg value="redis-ci"/>
+        </exec>
+    </target>
+
+    <target name="rm-redis-container" depends="stop-redis-container">
+        <exec executable="sudo" failonerror="true">
+            <arg value="docker"/>
+            <arg value="rm"/>
+            <arg value="redis-ci"/>
+        </exec>
+    </target>
+
+    <target name="stop-mongodb-container" depends="rm-redis-container">
+        <exec executable="sudo" failonerror="true">
+            <arg value="docker"/>
+            <arg value="stop"/>
+            <arg value="mongodb-ci"/>
+        </exec>
+    </target>
+
+    <target name="rm-mongodb-container" depends="stop-mongodb-container">
+        <exec executable="sudo" failonerror="true">
+            <arg value="docker"/>
+            <arg value="rm"/>
+            <arg value="mongodb-ci"/>
+        </exec>
+    </target>
+
+    <target name="main" depends="rm-mongodb-container"/>
+
+</project>

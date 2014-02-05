@@ -19,4 +19,8 @@ describe 'packages::default' do
     expect(chef_run).to install_package 'git-core'
   end
 
+  it 'installs libssl-dev' do
+    expect(chef_run).to install_package 'libssl-dev'
+  end
+
 end
