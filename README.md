@@ -29,7 +29,7 @@ The sample application is a simple Articles create, read, update and destroy (CR
     1. [Karma Test Runner](http://karma-runner.github.io/0.10/index.html) (Jasmine style w/ HTML code coverage reports)
     2. [Protractor](https://github.com/angular/protractor) end to end tests
 * Server-side
-    1. [Mocha](http://visionmedia.github.io/mocha/) (w/ HTML code coverage reports)
+    1. [Mocha](http://mochajs.org/) (w/ HTML code coverage reports)
     2. with [Sinon.JS](http://sinonjs.org/) and [Chai](http://chaijs.com/)
     3. API tests with [supertest](https://github.com/visionmedia/supertest)
 * Code Linting
